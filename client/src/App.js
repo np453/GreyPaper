@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react';
+import {BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
+//scss file
+import "./sass/main.scss"
+import Homepage from './views/home';
+
+
 
 function App() {
+//   const loader = document.querySelector(".preloader");
+
+// const showLoader = () => loader.classList.remove("preloader");
+// const addClass = () => loader.classList.add("loader-hide");
+//   useEffect(() => {
+//     showLoader();
+//     addClass();
+//   }, []);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+       <Router>
+        <ScrollToTop>
+        <switch>
+         
+          {/*HomePage route*/}
+          <Route path="/" exact  component={Homepage} />
+        </switch>
+        </ScrollToTop>
+        <Footer />
+      </Router>
     </div>
   );
 }
