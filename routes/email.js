@@ -5,10 +5,12 @@ const mail = require('../model/subscriber-list');
 // Pre initialized mongo document required
 
 router.post('/' , async( req, res ) => {
+    
 
     const data = await mail.find({ emails : { $exists:true } });
+    // console.log(data[0]._id)
     try {
-        mail.findByIdAndUpdate(data._id, { $push: {
+        mail.findByIdAndUpdate(data[0]._id, { $push: {
             emails:{
                 "email":req.body.email,
             }
@@ -27,10 +29,10 @@ router.post('/' , async( req, res ) => {
 // get route for email data
 router.get('/', async(req, res) => {
 const allcontacts = await mail.find({ })
-// const contacts = [];
-// for(let i=0;i<allcontacts[0].emails.length;i++) {
-// contacts.push( {_id:allcontacts[0].emails[i]._id,route:"contact",email:allcontacts[0].emails[i].email} )
-// }
+const contacts = [];
+for(let i=0;i<allcontacts[0].emails.length;i++) {
+contacts.push( {_id:allcontacts[0].emails[i]._id,route:"contact",email:allcontacts[0].emails[i].email} )
+}
 res.send(allcontacts)
 
 });
