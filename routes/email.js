@@ -1,19 +1,25 @@
 const router = require('express').Router();
-const mail = require('../model/email');
+const mail = require('../model/subscriber-list');
 
 //post route for email subscription
 // Pre initialized mongo document required
 
-router.post('/' , async(req,res)=>{
-    const data=await mail.find({});
-    mail.findByIdAndUpdate({_id:data[0]._id},  //Pushing each email element in the array
-        { $push: {
-                emails:{
-                    "email":req.body.email,
-                }
+router.post('/' , async( req, res ) => {
+
+    const data = await mail.find({ emails : { $exists:true } });
+    try {
+        mail.findByIdAndUpdate(data._id, { $push: {
+            emails:{
+                "email":req.body.email,
             }
+        }
         }).exec()
 
+        return res.status(200).send("Email registered!!")
+    }catch (err) {
+        res.status(400).send(err);
+    }
+        
     res.send(data)
 })
 
@@ -21,11 +27,11 @@ router.post('/' , async(req,res)=>{
 // get route for email data
 router.get('/', async(req, res) => {
 const allcontacts = await mail.find({ })
-const contacts = [];
-for(let i=0;i<allcontacts[0].emails.length;i++) {
-contacts.push( {_id:allcontacts[0].emails[i]._id,route:"contact",email:allcontacts[0].emails[i].email} )
-}
-res.send(contacts)
+// const contacts = [];
+// for(let i=0;i<allcontacts[0].emails.length;i++) {
+// contacts.push( {_id:allcontacts[0].emails[i]._id,route:"contact",email:allcontacts[0].emails[i].email} )
+// }
+res.send(allcontacts)
 
 });
 

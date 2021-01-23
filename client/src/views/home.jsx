@@ -28,12 +28,18 @@ class Homepage extends Component {
             return this.setState({ dataIsValid : false })
           }
         const payload = {
-            email : this.state.email
+            email : this.state.data.email
         }
 
-        const { data:resp } = axios.post('/subscriber-list', payload);
-        console.log(resp)
+        const { data:resp } = axios.post('http://localhost:6161/subscribers-list', payload);
+        console.log(resp);
     }
+
+    componentDidMount = async() => {
+        const { data:id } = await axios.get('http://localhost:6161/subscribers-list')
+        console.log(id)
+    }
+    
 
     render() {
 
