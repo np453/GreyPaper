@@ -4,9 +4,29 @@ const multer = require('multer')
 const cors = require('cors');
 const AWS = require('aws-sdk');
 const mongoose = require('mongoose');
+const mongodb = require("mongodb");
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 const path = require('path');
+
+var MongoClient = mongodb.MongoClient;
+var url = "mongodb://localhost:27017/greyPaper";
+
+// MongoClient.connect(url,{ useNewUrlParser: true, useUnifiedTopology: true }, (err, db) => {
+//   if (err) throw err;
+//   console.log("Database created!");
+//   db.close();
+// });
+
+// MongoClient.connect(url, (err, db) => {
+//   if (err) throw err;
+//   var dbo = db.db("greyPaper");
+//   dbo.createCollection("subscribers", function(err, res) {
+//     if (err) throw err;
+//     console.log("Collection created!");
+//     db.close();
+//   });
+// });
 
 
 const email = require('./routes/email'); 

@@ -1,6 +1,11 @@
 const router = require('express').Router();
 const mail = require('../model/subscriber-list');
 
+const mongodb = require("mongodb");
+
+var MongoClient = mongodb.MongoClient;
+var url = "mongodb://localhost:27017/greyPaper";
+
 //post route for email subscription
 // Pre initialized mongo document required
 
@@ -22,6 +27,22 @@ router.post('/' , async( req, res ) => {
         
     res.send(data)
 })
+
+// router.post('/' , async( req, res ) => {
+//     const findSubscribersList = async() => {
+
+//     }
+//     MongoClient.connect(url, function(err, db) {
+//         if (err) throw err;
+//         var dbo = db.db("greyPaper");
+//         var myobj = { email:req.body.email };
+//         dbo.collection("subscribers").insertOne(myobj, function(err, res) {
+//           if (err) throw err;
+//           console.log("email registered");
+//           db.close();
+//         });
+//       });
+// })
 
 
 // get route for email data
