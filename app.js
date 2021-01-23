@@ -8,6 +8,11 @@ const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 const path = require('path');
 
+
+const email = require('./routes/email'); 
+
+
+
 //Port
 const PORT = 6161;
 
@@ -20,6 +25,8 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.json());
+
+app.use('/api/email',email);
 
 
 //connect to DB

@@ -3,6 +3,8 @@ import {BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 //scss file
 import "./sass/main.scss"
+
+//Homepage component
 import Homepage from './views/home';
 
 
