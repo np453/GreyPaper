@@ -26,7 +26,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.json());
 
-app.use('/api/email',email);
+app.use('/subscribers-list',email);
 
 
 //connect to DB
