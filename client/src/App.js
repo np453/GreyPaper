@@ -1,9 +1,16 @@
 import React, { useEffect } from 'react';
 import {BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
+import ScrollToTop from './common/scrollToTop';
+
 //scss file
 import "./sass/main.scss"
+
+//landing Page
 import Homepage from './views/home';
+
+//footer
+import Footer from './components/footer';
 
 
 
@@ -23,10 +30,11 @@ function App() {
         <switch>
          
           {/*HomePage route*/}
-          <Route path="/" exact  component={Homepage} />
+          <Route path="/" exact component={Homepage} />
+
         </switch>
         </ScrollToTop>
-        <Footer />
+        {/* <Footer /> */}
       </Router>
     </div>
   );

@@ -1,0 +1,136 @@
+.brandlogo {
+    margin: 2.2rem auto;
+}
+.subscriber-list-form {
+    background-color: #F1F1F1;
+    padding: 1.8rem;
+    border-radius: 0.6rem;
+    h1 {
+        font-size: 44px;
+        margin-bottom: 5rem;
+    }   
+    h3 {
+        font-size: 22px;
+        width: 89%;
+        margin: 0 auto;
+    }
+    input {
+        border: none;
+        border: 1px solid #E4E4E4;
+        border-radius: 2px;
+        padding: 0.5rem;
+        background-color: #F9F9F9;
+        outline: none;
+        &::placeholder {
+            color: #a8a8a8;
+        }
+    }
+    button {
+        margin: 2rem auto;
+        width: 130px;
+        border: none;
+        background-color: #C7EADB;
+        border: 1px solid #7CBBA0;
+        color: rgba(black, 1);
+        padding: 0.4rem;
+        border-radius: 0.2rem;
+        transition: all 0.1s;
+        &:hover {
+            background-color: #c6e4d9;
+        }
+        &:focus {
+            background-color: #b8d4ca;
+            // box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+        }
+    }
+    .email-input {
+        margin-top: 3rem;
+    }
+
+    .socialmedia-tag {
+        background-color: rgba(#c4c4c4, 0.22);
+        padding: 0.47rem;
+        border-radius: 51px;
+        h5 {
+            font-size: 15px;
+            text-align: center;
+        }
+        h6 {
+            text-align: center;
+        }
+        span {
+            padding: 0.14rem;
+            color: #444;
+            background-color: #C0DADD;
+        }
+    }
+
+}
+
+@media (max-width:500px) {
+
+    .subscriber-list-form {
+        padding: 1.8rem;
+        h1 {
+            font-size: 29px;
+            margin-bottom: 2rem;
+        }   
+        h3 {
+            font-size: 14px;
+            width: 96%;
+            margin: 0 auto;
+        }
+        input {
+            border: none;
+            border: 1px solid #E4E4E4;
+            border-radius: 2px;
+            padding: 0.5rem;
+            background-color: #F9F9F9;
+            outline: none;
+            &::placeholder {
+                color: #a8a8a8;
+            }
+        }
+        button {
+            margin: 2rem auto;
+            width: 130px;
+            border: none;
+            background-color: #C7EADB;
+            border: 1px solid #7CBBA0;
+            color: rgba(black, 1);
+            padding: 0.4rem;
+            border-radius: 0.2rem;
+            transition: all 0.1s;
+            &:hover {
+                background-color: #c6e4d9;
+            }
+            &:focus {
+                background-color: #b8d4ca;
+                // box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+            }
+        }
+        .email-input {
+            margin-top: 3rem;
+        }
+    
+        .socialmedia-tag {
+            background-color: rgba(#c4c4c4, 0.22);
+            padding: 0.47rem;
+            border-radius: 30px;
+            h5 {
+                padding-top: 0.4rem;
+                font-size: 15px;
+                text-align: center;
+            }
+            h6 {
+                text-align: center;
+            }
+            span {
+                padding: 0.14rem;
+                color: #444;
+                background-color: #C0DADD;
+            }
+        }
+    
+    } 
+}
