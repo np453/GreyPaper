@@ -33,7 +33,7 @@ class Homepage extends Component {
             email : this.state.data.email
         }
 
-        const data = await axios.post('http://localhost:6161/subscribers-list', payload);
+        const data = await axios.post('/subscribers-list', payload);
         console.log(data.data)
         if (data.data === "Email registered!!") this.setState({ showMessage : true })
         else if ( data.data === "Email already exists" ) this.setState({ emailExist : true })
