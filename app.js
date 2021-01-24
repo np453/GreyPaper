@@ -1,17 +1,24 @@
+const dotenv = require('dotenv');
+require('dotenv').config();
+
 const express= require('express');
 const app= express();
 const multer = require('multer')
 const cors = require('cors');
 const AWS = require('aws-sdk');
+const passport = require('passport');
 const mongoose = require('mongoose');
 const mongodb = require("mongodb");
 const bodyParser = require('body-parser');
-const dotenv = require('dotenv');
+
+const cookieSession = require('cookie-session')
+
 const path = require('path');
 
-var MongoClient = mongodb.MongoClient;
-var url = "mongodb://localhost:27017/greyPaper";
+const MongoClient = mongodb.MongoClient;
+const url = "mongodb://localhost:27017/greyPaper";
 
+require('./routes/auth.js');
 // MongoClient.connect(url,{ useNewUrlParser: true, useUnifiedTopology: true }, (err, db) => {
 //   if (err) throw err;
 //   console.log("Database created!");
@@ -45,12 +52,30 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.json());
+app.use(cookieSession({
+  name: 'session',
+  keys: ['key1', 'key2']
+}))
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/subscribers-list',email);
 
 
 // connect to DB
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true }, () => console.log("Database is connected!"));
+
+
+//google login routes
+app.get('/google/login',
+  passport.authenticate('google', { scope: ['profile', 'email'] }));
+
+//callback route
+app.get('/google/callback', passport.authenticate('google', { failureRedirect: '/login' }), (req, res) => {
+    res.redirect('/');
+});
+
+
 
 app.use(express.static('client/build'));
 
