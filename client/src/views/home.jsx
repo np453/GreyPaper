@@ -31,12 +31,12 @@ class Homepage extends Component {
             email : this.state.data.email
         }
 
-        const data = axios.post('http://localhost:6161/subscribers-list', payload);
+        const data = axios.post('/subscribers-list', payload);
         
     }
 
     componentDidMount = async() => {
-        const { data:id } = await axios.get('http://localhost:6161/subscribers-list')
+        const { data:id } = await axios.get('/subscribers-list')
         console.log(id)
     }
     
