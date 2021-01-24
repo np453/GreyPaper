@@ -31,8 +31,8 @@ class Homepage extends Component {
             email : this.state.data.email
         }
 
-        const { data:resp } = axios.post('http://localhost:6161/subscribers-list', payload);
-        console.log(resp);
+        const data = axios.post('http://localhost:6161/subscribers-list', payload);
+        
     }
 
     componentDidMount = async() => {
