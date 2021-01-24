@@ -10,6 +10,8 @@ class Homepage extends Component {
         data : {
             email:""
         },
+        showMessage:false,
+        emailExist : false,
         dataIsValid:true
     }
     
@@ -31,15 +33,13 @@ class Homepage extends Component {
             email : this.state.data.email
         }
 
-        const data = axios.post('/subscribers-list', payload);
+        const data = await axios.post('http://localhost:6161/subscribers-list', payload);
+        console.log(data.data)
+        if (data.data === "Email registered!!") this.setState({ showMessage : true })
+        else if ( data.data === "Email already exists" ) this.setState({ emailExist : true })
         
     }
 
-    componentDidMount = async() => {
-        const { data:id } = await axios.get('/subscribers-list')
-        console.log(id)
-    }
-    
 
     render() {
 
@@ -57,6 +57,7 @@ class Homepage extends Component {
                             Keep the patience going and subscribe 
                             to the mailing list to get 30% off on exculsive 
                             canvas wallarts and posters 
+                            
                             <svg className="pl-2" width="29" height="29" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g clip-path="url(#clip0)">
                                 <path d="M12.8033 2.19671C11.3867 0.78014 9.50331 0 7.49999 0C5.49666 0 3.61326 0.78014 2.19671 2.19671C0.780169 3.61329 0 5.49666 0 7.50001C0 9.50333 0.78014 11.3867 2.19671 12.8033C3.61329 14.2199 5.49669 15 7.50001 15C9.50333 15 11.3867 14.2199 12.8033 12.8033C14.2199 11.3867 15 9.50333 15 7.50001C15 5.49666 14.2199 3.61326 12.8033 2.19671V2.19671ZM12.1818 12.1818C10.9312 13.4323 9.26854 14.121 7.49999 14.121C5.73143 14.121 4.06875 13.4323 2.81818 12.1818C1.56766 10.9312 0.878932 9.26854 0.878932 7.50001C0.878932 5.73149 1.56766 4.06875 2.81821 2.81821C4.06875 1.56763 5.73146 0.878932 7.49999 0.878932C9.26851 0.878932 10.9312 1.56763 12.1818 2.81821C13.4323 4.06875 14.121 5.73146 14.121 7.50001C14.121 9.26857 13.4323 10.9312 12.1818 12.1818V12.1818Z"
@@ -76,8 +77,20 @@ class Homepage extends Component {
                             </svg>
                         </h3>
                         <div className="email-input form-group justify-content-center mx-auto col-md-4 d-flex flex-column">
+                        {this.state.showMessage && 
+                        <p className="success-message" style={{ color:"#4B8039", border:"2px solid #64C67A", borderRadius:"3.5px" , backgroundColor:"#C5EDCE" }} className="p-2 mt-3 text-center">
+                            <div>Email registered!!
+                                <i style={{ backgroundColor:"#87CE81" }} onClick={() => this.setState({ showMessage : false })} className="fa fa-times" aria-hidden="true"></i>
+                            </div>
+                        </p>}
+                        {this.state.emailExist && 
+                        <p className="error-message" style={{ color:"#931C1C", border:"2px solid #D44343", borderRadius:"3.5px" , backgroundColor:"#E46D65" }} className="p-2 mt-3 text-center">
+                            <div>Email already registered
+                                <i style={{ backgroundColor:"#D45454" }} onClick={() => this.setState({ emailExist:false })} className="fa fa-times" aria-hidden="true"></i>
+                            </div>
+                        </p>}
                             <input name="email" id="email" value={this.state.data.email} onChange={this.handleChange} placeholder="email" type="email"/>
-                            {this.state.dataIsValid===false ? <span>please enter a valid data</span> : null }
+                            {this.state.dataIsValid===false ? <span style={{ color:"#44A3B8" }}>please enter a valid email</span> : null }
                             <button onClick={this.handleSubmit}>Submit</button>
                         </div>
 

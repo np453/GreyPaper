@@ -14,6 +14,9 @@ router.post('/' , async( req, res ) => {
 
     const data = await mail.find({ emails : { $exists:true } });
     // console.log(data[0]._id)
+
+    const ifMailExist = await mail.findOne({ emails : { $elemMatch : { "email" : req.body.email  } } });
+    if (ifMailExist) return res.send("Email already exists");
     try {
         mail.findByIdAndUpdate(data[0]._id, { $push: {
             emails:{

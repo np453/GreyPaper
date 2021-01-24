@@ -12,7 +12,7 @@
     h3 {
         font-size: 22px;
         width: 89%;
-        margin: 0 auto;
+        margin: 3.5rem auto;
     }
     input {
         border: none;
@@ -43,9 +43,22 @@
             // box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
         }
     }
-    .email-input {
-        margin-top: 3rem;
-    }
+    // .email-input {
+    //     margin-top: 3rem;
+    // }
+
+        .fa-times {
+            position: absolute;
+            right: 22px;
+            top: 12.3%;
+            background-color: white;
+            padding: 0.2rem;
+            width: 22px;
+            border-radius: 2px;
+            &:hover {
+                cursor: pointer;
+            }
+        }
 
     .socialmedia-tag {
         background-color: rgba(#c4c4c4, 0.22);
