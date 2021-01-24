@@ -7,6 +7,7 @@ const User = require('../model/user');
 var passport = require('passport');
 
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+var FacebookStrategy = require('passport-facebook').Strategy;
 
 passport.serializeUser((user, done) => {
     done(null, user);
@@ -16,7 +17,6 @@ passport.deserializeUser((user, done) => {
 })
 
 passport.use(
-    
     new GoogleStrategy({
         clientID: process.env.CLIENT_ID,
         clientSecret: process.env.CLIENT_SECRET,
@@ -71,3 +71,50 @@ passport.use(
 //     and append the "?sz=100" parameter, that will also work 
 //     as of now. Though this is not very good way of getting the 
 //     profile picture of a gplus user, but the advantage is it do not require any api key.
+
+
+//facebook login
+passport.use( new FacebookStrategy({
+        clientID: process.env.FACEBOOK_CLIENT_ID,
+        clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+        callbackURL: "http://localhost:6161/facebook/callback",
+        profileFields   : ['id', 'displayName', 'name', 'gender', 'picture.type(large)', 'email' ]
+    },
+    
+    async (accessToken, refreshToken, profile, done) => {
+
+    const name = profile._json.first_name;
+    const emailExist = await User.findOne({ email:profile.id });
+
+    if (emailExist) {
+        return ;
+    }
+    else {
+
+        //Hash passwords
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(profile.id + profile.displayName, salt);
+
+        const user = new User({ 
+            uname:name,
+            dname:name,
+            email:profile.id,
+            password:hashedPassword,
+            profileImg:profile.photos[0].value,
+            theme:"light",
+            kind:[
+                {
+                    provider:profile.provider,
+                    id:profile.id
+                }
+            ],
+         })
+         console.log(profile);
+        const savedUser = await user.save();
+        return done(err, savedUser)
+    }  
+    console.log(profile);
+    return done(null, profile);
+        }
+)
+);

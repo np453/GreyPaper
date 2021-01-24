@@ -75,6 +75,12 @@ app.get('/google/callback', passport.authenticate('google', { failureRedirect: '
     res.redirect('/');
 });
 
+//facebook login routes
+app.get('/facebook/login', passport.authenticate('facebook', { scope : 'email' } ));
+
+//facebook callback route
+app.get('/facebook/callback', passport.authenticate('facebook', { successRedirect: '/',
+failureRedirect: '/login' }));
 
 
 app.use(express.static('client/build'));

@@ -1,0 +1,15 @@
+<svg width="253" height="73" viewBox="0 0 253 73" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="73.292" cy="26.8303" r="16.8648" fill="#2199A9"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M73.2922 53.6606C88.1102 53.6606 100.123 41.6483 100.123 26.8303C100.123 12.0123 88.1102 0 73.2922 0C58.4743 0 46.4619 12.0123 46.4619 26.8303C46.4619 41.6483 58.4743 53.6606 73.2922 53.6606ZM73.292 50.5943C86.4165 50.5943 97.056 39.9548 97.056 26.8303C97.056 13.7059 86.4165 3.06635 73.292 3.06635C60.1675 3.06635 49.528 13.7059 49.528 26.8303C49.528 39.9548 60.1675 50.5943 73.292 50.5943Z" fill="#2199A9"/>
+<circle cx="179.847" cy="26.8303" r="16.8648" fill="#2199A9"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M179.847 53.6606C194.665 53.6606 206.677 41.6483 206.677 26.8303C206.677 12.0123 194.665 0 179.847 0C165.029 0 153.017 12.0123 153.017 26.8303C153.017 41.6483 165.029 53.6606 179.847 53.6606ZM179.847 50.5943C192.971 50.5943 203.611 39.9548 203.611 26.8303C203.611 13.7059 192.971 3.06635 179.847 3.06635C166.722 3.06635 156.083 13.7059 156.083 26.8303C156.083 39.9548 166.722 50.5943 179.847 50.5943Z" fill="#2199A9"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M100.122 49.8278C102.303 62.4543 113.31 72.0586 126.56 72.0586C139.809 72.0586 150.816 62.4543 152.997 49.8278H149.879C147.736 60.7511 138.11 68.9923 126.559 68.9923C115.009 68.9923 105.382 60.7511 103.24 49.8278H100.122Z" fill="#2199A9"/>
+<line x1="3" y1="-3" x2="31.386" y2="-3" transform="matrix(-0.891736 0.452556 -0.719401 -0.694595 248.839 9.96558)" stroke="#2199A9" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="3" y1="-3" x2="31.386" y2="-3" transform="matrix(-0.891736 -0.452556 -0.719401 0.694595 248.839 42.392)" stroke="#2199A9" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="3" y1="-3" x2="31.386" y2="-3" transform="matrix(0.891736 0.452556 0.719401 -0.694595 5.83301 10.7322)" stroke="#2199A9" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="3" y1="-3" x2="31.386" y2="-3" transform="matrix(0.891736 -0.452556 0.719401 0.694595 5.83301 43.1586)" stroke="#2199A9" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="3" y1="-3" x2="31.386" y2="-3" transform="matrix(1 0 0.327173 -0.944964 2.43848 49.8278)" stroke="#2199A9" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="3" y1="-3" x2="31.386" y2="-3" transform="matrix(1 0 0.327173 -0.944964 218.614 49.8278)" stroke="#2199A9" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="3" y1="-3" x2="31.386" y2="-3" transform="matrix(1 0 0.327173 -0.944964 218.176 57.3785)" stroke="#2199A9" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="3" y1="-3" x2="31.386" y2="-3" transform="matrix(1 0 0.327173 -0.944964 2 57.3785)" stroke="#2199A9" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

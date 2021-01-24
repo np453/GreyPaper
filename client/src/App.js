@@ -11,6 +11,7 @@ import Homepage from './views/home';
 
 //footer
 import Footer from './components/footer';
+import LandingPage from './views/LandingPage';
 
 
 
@@ -31,6 +32,9 @@ function App() {
          
           {/*HomePage route*/}
           <Route path="/" exact component={Homepage} />
+
+          {/*Landing page route*/}
+          <Route path="/home" component={LandingPage} />
 
         </switch>
         </ScrollToTop>
