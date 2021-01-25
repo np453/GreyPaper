@@ -104,22 +104,6 @@
     h5 {
         margin: 1.5rem auto;
     }
-    input {
-        border: none;
-        border: 1px solid #E4E4E4;
-        border-radius: 2px;
-        padding: 0.5rem;
-        background-color: #F9F9F9;
-        outline: none;
-        &::placeholder {
-            color: #a8a8a8;
-        }
-    }
-    .form-bottom-row {
-        margin-top: 2rem !important;
-        background-color: #f1f1f1;
-        border-top: 1px solid rgba(black, 0.2);
-    }
     
     button {
         margin: 2rem auto;
@@ -155,26 +139,6 @@
                 cursor: pointer;
             }
         }
-
-    .socialmedia-tag {
-        background-color: rgba(#e97373, 0.22);
-        padding: 0.47rem;
-        border-radius: 51px;
-        margin-bottom: 1.3rem;
-        .socialmediah5-1 {
-            font-size: 15px;
-            text-align: center;
-            margin: 0.7rem auto;
-        }
-        h6 {
-            text-align: center;
-        }
-        span {
-            padding: 0.14rem;
-            color: #444;
-            background-color: #f8a0bb;
-        }
-    }
 
 }
 

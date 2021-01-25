@@ -29,12 +29,12 @@ function App() {
        <Router>
         <ScrollToTop>
         <switch>
-         
-          {/*HomePage route*/}
-          <Route path="/" exact component={Homepage} />
 
-          {/*Landing page route*/}
-          <Route path="/home" component={LandingPage} />
+          {/*Landing page route (when user is not logged in) */}
+          <Route path="/" exact component={LandingPage} />
+         
+          {/*HomePage route (when user is logged in) */}
+          <Route path="/upload-design/home" component={Homepage} />
 
         </switch>
         </ScrollToTop>

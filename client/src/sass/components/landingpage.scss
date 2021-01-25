@@ -1,0 +1,131 @@
+.slick-prev, .slick-next {
+    display: none !important;
+}
+
+.landingpage {
+    .landingpagecontent {
+        color: #4A4A4A;
+        h1 {
+            font-weight: 600;
+            font-size: 77px;
+            font-family: $font-1;
+        }
+        h3 {
+            margin: 2.4rem auto;
+            font-weight: 600;
+            font-size: 42px;
+            font-family: $font-2; 
+        }
+    }
+    .landingpagewall {
+        img {
+            height: 400px;
+            margin: 0 auto !important;
+            &::selection {
+                display: none;
+            }
+        }
+        h3 {
+            margin-top: 2rem;
+            color: #4A4A4A;
+            font-family: $font-2;
+            font-size: 33px;
+        }
+    }
+
+    .login-buttons {
+        margin: 2.3rem auto;
+        button {
+            border: none;
+            width: 130px;
+            border-radius: 0.2rem;
+            padding: 0.2rem;
+            transition: all 0.3s;
+            &:hover {
+                background-color: rgb(216, 215, 215);
+            }
+        }
+    }
+}
+
+@media (max-width:768px) {
+    .landingpage {
+        .landingpagewall {
+            img {
+                height: 250px !important;
+            }
+            h3 {
+                margin-top: 2rem;
+                font-size: 26px;
+            }
+        }
+        .landingpagecontent {
+            h1 {
+                font-size: 46px;
+                font-family: $font-2;
+            }
+            h3 {
+                margin: 2.4rem auto;
+                font-size: 36px;
+            }
+        }
+    }
+}
+
+
+@media (max-width:426px) {
+    .landingpage {
+        .landingpagewall {
+            img {
+                height: 250px !important;
+            }
+            h3 {
+                margin-top: 2rem;
+                font-size: 22px;
+            }
+        }
+        .landingpagecontent {
+            h1 {
+                font-size: 33px;
+                font-family: $font-2;
+            }
+            h3 {
+                margin: 2.4rem auto;
+                font-size: 23px;
+            }
+        }
+    }
+}
+
+@media (max-width:376px) {
+    .landingpagewall {
+        img {
+            height: 285px !important;
+        }
+    }
+}
+
+@media (max-width:400px) {
+    
+    .landingpage {
+        .landingpagewall {
+            img {
+                height: 250px !important;
+            }
+            h3 {
+                margin-top: 2rem;
+                font-size: 22px;
+            }
+        }
+        .landingpagecontent {
+            h1 {
+                font-size: 28px;
+                font-family: $font-2;
+            }
+            h3 {
+                margin: 2.4rem auto;
+                font-size: 23px;
+            }
+        }
+    }
+}
