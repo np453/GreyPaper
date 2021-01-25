@@ -53,6 +53,11 @@ class LandingPage extends Component {
               ]
         },
     }
+    handlegooglelogin= async ()=>{
+        const data = await axios.get('http://localhost:6161/google/login');
+        console.log(data);
+
+    }
 
     render() {
         return (
@@ -81,8 +86,8 @@ class LandingPage extends Component {
                     <h3 className="text-center">start uploading your designs</h3>
                 </div>
                     <div className="login-buttons text-center">
-                        <button className="m-2"><img src={googlelogo} className="m-1 img img-fluid" alt=""/></button>
-                        <button className="m-2"><img src={fblogo} className="m-1 img img-fluid" alt=""/></button>
+                        <button onClick={this.handlegooglelogin} className="m-2"><img src={googlelogo} className="m-1 img img-fluid" alt=""/></button>
+                        <button onClick={this.handlefacebooklogin} className="m-2"><img src={fblogo} className="m-1 img img-fluid" alt=""/></button>
                     </div>
                 <BottomRow/>
             </div>
