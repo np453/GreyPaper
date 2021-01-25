@@ -1,0 +1,70 @@
+.signup-form {
+    background-color: #FDFDFD;
+    font-family: $font-3;
+    width: 63%;
+    margin: 4rem auto;
+
+    h3 {
+        padding: 1.4rem;
+        font-size: 25px;
+    }
+
+    .auth-form-group {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        margin-top: 2.2rem;
+
+        label {
+            font-size: 15px;
+            font-family: $font-3;
+        }
+    }
+}
+
+.auth-button {
+    margin: 1.6rem auto;
+    background-color: white;
+    border: 2px solid #2751E5;
+    color: #2751E5;
+    border-radius: 3px;
+    padding: 0.2rem;
+    width: 120px;
+    &:hover {
+        transform: scale(1.01);
+    }
+}
+.auth-input-box {
+    border: 0;
+    padding: 0.4rem;
+    background-color: white;
+    border: 2px solid #E7E7E7;
+    border-radius: 3px;
+    &:focus {
+        outline: none;
+    }
+    ::placeholder {
+        color: #929292;
+        opacity: 1; 
+      }
+      
+      :-ms-input-placeholder {
+       color: #929292;
+      }
+      
+      ::-ms-input-placeholder {
+       color: #929292;
+      }
+}
+
+@media (max-width:900px) {
+    .signup-form {
+        width: 90%;
+    }
+}
+
+@media (max-width:520px) {
+    .signup-form {
+        width: 90%;
+    }
+}

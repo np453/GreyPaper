@@ -12,6 +12,11 @@ import Homepage from './views/home';
 //footer
 import Footer from './components/footer';
 import LandingPage from './views/LandingPage';
+import Signup from './components/auth/signup';
+import Login from './components/auth/login';
+import ForgotPass from './components/auth/forgotPass';
+import Otp from './components/auth/otp';
+import ResetPass from './components/auth/resetPass';
 
 
 
@@ -32,7 +37,22 @@ function App() {
 
           {/*Landing page route (when user is not logged in) */}
           <Route path="/" exact component={LandingPage} />
-         
+
+         {/*Signup page route */}
+         <Route path="/signup" component={Signup} />
+
+         {/*Login page route */}
+         <Route path="/login" component={Login} />
+
+         {/*forgot password page route */}
+         <Route path="/forgot-password" component={ForgotPass} />
+
+         {/*enter otp page route */}
+         <Route path="/enter-otp" component={Otp} />
+
+         {/*reset password page route */}
+         <Route path="/reset-password" component={ResetPass} />
+
           {/*HomePage route (when user is logged in) */}
           <Route path="/upload-design/home" component={Homepage} />
 

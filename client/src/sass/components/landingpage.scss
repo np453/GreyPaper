@@ -33,21 +33,21 @@
         }
     }
 
-    .login-buttons {
-        margin: 2.3rem auto;
-        button {
-            border: none;
-            width: 130px;
-            border-radius: 0.2rem;
-            padding: 0.2rem;
-            transition: all 0.3s;
-            &:hover {
-                background-color: rgb(216, 215, 215);
-            }
+    
+}
+.login-buttons {
+    margin: 2.3rem auto;
+    button {
+        border: none;
+        width: 130px;
+        border-radius: 0.2rem;
+        padding: 0.2rem;
+        transition: all 0.3s;
+        &:hover {
+            background-color: rgb(216, 215, 215);
         }
     }
 }
-
 @media (max-width:768px) {
     .landingpage {
         .landingpagewall {
