@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import axios from 'axios';
-
+import { Link } from 'react-router-dom';
 import brandlogo from '../assets/brandlogo.svg';
 
 import landingpagewall1 from '../assets/landingpagewall1.png';
@@ -59,6 +59,7 @@ class LandingPage extends Component {
 
     }
 
+
     render() {
         return (
             <div className="container-fluid landingpage p-0">
@@ -86,8 +87,8 @@ class LandingPage extends Component {
                     <h3 className="text-center">start uploading your designs</h3>
                 </div>
                     <div className="login-buttons text-center">
-                        <button onClick={this.handlegooglelogin} className="m-2"><img src={googlelogo} className="m-1 img img-fluid" alt=""/></button>
-                        <button onClick={this.handlefacebooklogin} className="m-2"><img src={fblogo} className="m-1 img img-fluid" alt=""/></button>
+                        <a href="http://localhost:6161/google/login"><button className="m-2"><img src={googlelogo} className="m-1 img img-fluid" alt=""/></button></a>
+                        <a href="http://localhost:6161/facebook/login"><button className="m-2"><img src={fblogo} className="m-1 img img-fluid" alt=""/></button></a>
                     </div>
                 <BottomRow/>
             </div>

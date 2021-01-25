@@ -48,8 +48,8 @@ dotenv.config();
 
 
 //Middlewaress
-app.use(cors());
 app.use(bodyParser.json());
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.json());
 app.use(cookieSession({

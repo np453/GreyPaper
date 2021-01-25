@@ -20,7 +20,7 @@ passport.use(
     new GoogleStrategy({
         clientID: process.env.CLIENT_ID,
         clientSecret: process.env.CLIENT_SECRET,
-        callbackURL: "http://localhost:6161/google/callback"
+        callbackURL: "http://localhost:3001/"
     },
     
     async (accessToken, refreshToken, profile, done) => {
@@ -77,7 +77,7 @@ passport.use(
 passport.use( new FacebookStrategy({
         clientID: process.env.FACEBOOK_CLIENT_ID,
         clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-        callbackURL: "http://localhost:6161/facebook/callback",
+        callbackURL: "http://localhost:3001/",
         profileFields   : ['id', 'displayName', 'name', 'gender', 'picture.type(large)', 'email' ]
     },
     
@@ -98,7 +98,7 @@ passport.use( new FacebookStrategy({
         const user = new User({ 
             uname:name,
             dname:name,
-            email:profile.id,
+            email:"",
             password:hashedPassword,
             profileImg:profile.photos[0].value,
             theme:"light",
