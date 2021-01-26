@@ -18,6 +18,11 @@ class Homepage extends Component {
         dataIsValid:true
     }
     
+    componentDidMount= async ()=> {
+        const data=await axios.get('http://localhost:6161/test');
+        console.log(data);
+    }
+    
     handleChange = ({currentTarget:input}) => {
         const data = {...this.state.data};
         data[input.name] = input.value;
