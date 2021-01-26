@@ -64,7 +64,7 @@ class LandingPage extends Component {
         return (
             <div className="container-fluid landingpage p-0">
                 <div className="row m-0 d-flex justify-content-center">
-                    <img src={brandlogo} className="brandlogo img img-fluid" alt=""/>
+                    <img style={{ pointerEvents:"none" }} src={brandlogo} className="brandlogo img img-fluid" alt=""/>
                 </div>
                 <div className="container landingpagecontent">
                     <h1 className="text-center">Why design for free <span style={{ fontFamily:"Helvetica" }}>!!</span></h1>
@@ -84,12 +84,19 @@ class LandingPage extends Component {
                                 <img className="img img-fluid" src={landingpagewall3} />     
                             </div>
                     </Slider>
-                    <h3 className="text-center">start uploading your designs</h3>
+                    <div className="landingpagecontent">
+                    <h3 className="text-center">
+                        We're building up the interface, which will be in service shortly!
+                    </h3>
+                    <h3 className="text-center mb-5">
+                        Soon, You'll be able to showcase your designs and participate in design events
+                    </h3>
+                    </div>
                 </div>
-                    <div className="login-buttons text-center">
+                    {/* <div className="login-buttons text-center">
                         <a href="http://localhost:6161/google/login"><button className="m-2"><img src={googlelogo} className="m-1 img img-fluid" alt=""/></button></a>
                         <a href="http://localhost:6161/facebook/login"><button className="m-2"><img src={fblogo} className="m-1 img img-fluid" alt=""/></button></a>
-                    </div>
+                    </div> */}
                 <BottomRow/>
             </div>
         );
