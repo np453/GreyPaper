@@ -17,6 +17,7 @@ import Login from './components/auth/login';
 import ForgotPass from './components/auth/forgotPass';
 import Otp from './components/auth/otp';
 import ResetPass from './components/auth/resetPass';
+import Payment from './components/payment';
 
 
 
@@ -52,6 +53,9 @@ function App() {
 
          {/*reset password page route */}
          <Route path="/reset-password" component={ResetPass} />
+
+         {/*reset password page route */}
+         <Route path="/pay" component={Payment} />
 
           {/*HomePage route (when user is logged in) */}
           <Route path="/upload-design/home" component={Homepage} />

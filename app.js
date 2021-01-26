@@ -15,10 +15,13 @@ const cookieSession = require('cookie-session')
 
 const path = require('path');
 
+const payment = require('./routes/payment');
+const email = require('./routes/email');
+require('./routes/auth.js'); 
+
 const MongoClient = mongodb.MongoClient;
 const url = "mongodb://localhost:27017/greyPaper";
 
-require('./routes/auth.js');
 // MongoClient.connect(url,{ useNewUrlParser: true, useUnifiedTopology: true }, (err, db) => {
 //   if (err) throw err;
 //   console.log("Database created!");
@@ -34,9 +37,6 @@ require('./routes/auth.js');
 //     db.close();
 //   });
 // });
-
-
-const email = require('./routes/email'); 
 
 
 
@@ -57,20 +57,21 @@ app.use(cookieSession({
   name: 'session',
   keys: ['key1', 'key2']
 }))
+
 app.use(passport.initialize());
 app.use(passport.session());
 // app.use(cookie());
 
 app.use('/subscribers-list',email);
+app.use('/payment', payment);
 
 
 // connect to DB
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true }, () => console.log("Database is connected!"));
 
-app.get('/test',(req,res)=>{
-  // cookie.set("test","123");
-  res.cookie("test", "6972"); 
-  res.send("jf0");
+app.get('/success', (req, res) => {
+  console.log('success');
+  res.send('success')
 })
 
 //google login routes
@@ -86,8 +87,9 @@ app.get('/google/callback', passport.authenticate('google', { failureRedirect: '
 app.get('/facebook/login', passport.authenticate('facebook', { scope : 'email' } ));
 
 //facebook callback route
-app.get('/facebook/callback', passport.authenticate('facebook', { successRedirect: '/',
-failureRedirect: '/login' }));
+app.get('/facebook/callback', passport.authenticate('facebook', {failureRedirect: '/login' }), (req, res) => {
+  res.redirect('/')
+});
 
 
 app.use(express.static('client/build'));
