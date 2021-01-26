@@ -8,24 +8,21 @@ const uuidv4 = uuid.v4;
 
 router.post('/', async(req, res) => {
 
-    const token = req.body.token
-    const product = req.body.product
+    const { token, product } = req.body;
     
-    const idempotencykey = uuidv4();
+    const idempotencyKey = uuidv4();
 
     const customer = await Stripe.customers.create({
         email:token.email,
         source:token.id
     })
         
-    console.log(customer)
-        
     const charges = await Stripe.charges.create({
             amount:product.price * 100,
-            currency:"usd",
+            currency:"INR",
             customer:customer.id,
             description:`${product.name} purchased`,
-        }, {idempotencykey})
+        }, {idempotencyKey})
 
         console.log(charges)
         res.send(charges)
