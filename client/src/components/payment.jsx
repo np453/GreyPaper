@@ -9,25 +9,26 @@ class Payment extends Component {
     state = {
         product : {
             name: "Pay for event",
-            price:100
+            price:10
         }
     }
 
     makePayment = async(token) => {
         const payload = { product:this.state.product, token }
         const { data:payData } = await axios.post('http://localhost:6161/payment', payload)
-        console.log(payData)
 
     }
-
+    
     render() {
         return (
             <div className="container">
                 <StripeCheckout 
-                        stripeKey={process.env.REACT_APP_KEY} 
+                //https://stackoverflow.com/questions/59607312/env-variable-returns-undefined-in-react-js-app
+
+                        stripeKey={process.env.REACT_APP_API_KEY} 
                         token={this.makePayment}
                         amount={this.state.product.price * 100} 
-                        name="Purchase">
+                        name={ this.state.product.name }>
                     <button className="btn btn-info ">Purchase</button>
                 </StripeCheckout>
             </div>
