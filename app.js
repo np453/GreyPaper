@@ -10,7 +10,7 @@ const passport = require('passport');
 const mongoose = require('mongoose');
 const mongodb = require("mongodb");
 const bodyParser = require('body-parser');
-
+const cookieParser = require('cookie-parser'); 
 const cookieSession = require('cookie-session')
 
 const path = require('path');
@@ -52,12 +52,14 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.json());
+app.use(cookieParser());
 app.use(cookieSession({
   name: 'session',
   keys: ['key1', 'key2']
 }))
 app.use(passport.initialize());
 app.use(passport.session());
+// app.use(cookie());
 
 app.use('/subscribers-list',email);
 
@@ -66,6 +68,8 @@ app.use('/subscribers-list',email);
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true }, () => console.log("Database is connected!"));
 
 app.get('/test',(req,res)=>{
+  // cookie.set("test","123");
+  res.cookie("test", "6972"); 
   res.send("jf0");
 })
 

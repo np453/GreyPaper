@@ -1,14 +1,14 @@
 const dotenv = require('dotenv');
 require('dotenv').config();
 const bcrypt = require('bcryptjs');
-
+const cookieParser = require('cookie-parser');
 const User = require('../model/user');
 
 var passport = require('passport');
 
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
-
+passport.use(cookieParser());
 passport.serializeUser((user, done) => {
     done(null, user);
 })
