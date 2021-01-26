@@ -20,13 +20,11 @@ passport.use(
     new GoogleStrategy({
         clientID: process.env.CLIENT_ID,
         clientSecret: process.env.CLIENT_SECRET,
-        callbackURL: "http://localhost:3001/"
+        callbackURL: "http://localhost:6161/google/callback"
     },
     
     async (accessToken, refreshToken, profile, done) => {
-    //    User.findOrCreate({ googleId: profile.id }, (err, user) => {
-    //     console.log(user);   
-    //     return done(err, user) });
+
     const email = profile.emails[0].value;
     const emailExist = await User.findOne({ email:email });
 
@@ -53,9 +51,9 @@ passport.use(
                 }
             ],
          })
-         console.log(profile);
+         
         const savedUser = await user.save();
-        return done(err, savedUser)
+        return done(null, savedUser)
     }  
         }
 )
@@ -77,14 +75,14 @@ passport.use(
 passport.use( new FacebookStrategy({
         clientID: process.env.FACEBOOK_CLIENT_ID,
         clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-        callbackURL: "http://localhost:3001/",
+        callbackURL: "http://localhost:6161/facebook/callback",
         profileFields   : ['id', 'displayName', 'name', 'gender', 'picture.type(large)', 'email' ]
     },
     
     async (accessToken, refreshToken, profile, done) => {
 
     const name = profile._json.first_name;
-    const emailExist = await User.findOne({ email:profile.id });
+    const emailExist = await User.findOne({ kind: { $elemMatch : { "id" : profile.id } } });
 
     if (emailExist) {
         return ;
@@ -109,12 +107,9 @@ passport.use( new FacebookStrategy({
                 }
             ],
          })
-         console.log(profile);
         const savedUser = await user.save();
-        return done(err, savedUser)
+        return done(null, savedUser)
     }  
-    console.log(profile);
-    return done(null, profile);
         }
 )
 );
