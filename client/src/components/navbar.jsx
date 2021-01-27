@@ -7,10 +7,13 @@ import Styled from 'styled-components';
 import Cookies from 'js-cookie';
 import {Redirect} from 'react-router-dom';
 
+
+import { useHistory } from 'react-router-dom'
 import brandlogo from '../assets/brandlogo.svg'
 
 const Navbar = props => {
     const [isOpen, setOpen] = useState(false);
+    const history = useHistory()
     const [openNotificationBox, setOpenNotificationBox] = useState(false);
     const [width, setWidth] = useState("-300px");
     // const [ sideBarOpacity, setSideBarOpacity ] = useState(0);
@@ -48,7 +51,6 @@ const Navbar = props => {
         if(Cookies.get("user") == undefined){
             console.log("working");
             return <Redirect to="/" />
-            
         }
         document.addEventListener('click', handleClickOutside, true);
         document.addEventListener('click', handleClickOutsideNavabrPopOver, true);
@@ -83,18 +85,15 @@ const Navbar = props => {
         }
     }
     const handleLogout = async e =>{
-        Cookies.remove("user");
+        await Cookies.remove("user");
         await axios.get(base + 'logout');
-        console.log(Cookies.get("user"))
-        return <Redirect to="/home" />
+        // console.log(Cookies.get("user"))
+        history.push("/");
     }
     const handleForm = (e) => {
         setEmail(e.target.value);
     }
-    const navbarPopOver = Styled.div`
-        list-stlye-type : "none"
-        padding: 0rem
-    `
+
     const openPopOver = () => {
         setNavbarPopOverClass('navbar-popover-open')
         setCaretDir('rotate(180deg)')

@@ -37,14 +37,16 @@ class Homepage extends Component {
      componentDidMount = async() => {
 
          //get user id
-         const senduser = Cookies.get("user") == undefined ? "undefined" : Cookies.get("user");
+         const senduser = Cookies.get("user") === undefined ? "undefined" : Cookies.get("user");
          await this.setState({userid:senduser.slice(3, senduser.length-1)})
 
          //get user
          const { data : user } = await axios.get(base + `get-user/` + this.state.userid);
          this.setState({ user });
-         if(Cookies.get("user") == undefined){
-            return <Redirect to="/" />
+         if(Cookies.get("user") === undefined){
+            await axios.get(base + 'logout');
+            console.log("it runs")
+            Redirect();
         }
    
 
