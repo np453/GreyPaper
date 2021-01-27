@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { base } from '../base';
 import Cookies from 'js-cookie';
+import {Redirect} from 'react-router-dom';
 
 //importing brandlogo
 import brandlogo from '../assets/brandlogo.svg';
@@ -36,13 +37,16 @@ class Homepage extends Component {
      componentDidMount = async() => {
 
          //get user id
-         const senduser = Cookies.get("user")
+         const senduser = Cookies.get("user") == undefined ? "undefined" : Cookies.get("user");
          await this.setState({userid:senduser.slice(3, senduser.length-1)})
 
          //get user
          const { data : user } = await axios.get(base + `get-user/` + this.state.userid);
-         this.setState({ user })
-         console.log(this.state.user)
+         this.setState({ user });
+         if(Cookies.get("user") == undefined){
+            return <Redirect to="/" />
+        }
+   
 
      }
      
@@ -114,7 +118,9 @@ class Homepage extends Component {
     render() {
         const username = this.state.user === undefined ? null : this.state.user.uname
         const userimage = this.state.user === undefined ? null : this.state.user.profileImg
-        console.log(username)
+        if(Cookies.get("user") === undefined){
+            return <Redirect to="/" />
+        }
         return (
             <div>
                 <Navbar

@@ -4,6 +4,8 @@ import Popover from '@material-ui/core/Popover';
 import axios from 'axios';
 import { base } from '../base';
 import Styled from 'styled-components';
+import Cookies from 'js-cookie';
+import {Redirect} from 'react-router-dom';
 
 import brandlogo from '../assets/brandlogo.svg'
 
@@ -43,10 +45,16 @@ const Navbar = props => {
     }
 
     useEffect(() => {
+        if(Cookies.get("user") == undefined){
+            console.log("working");
+            return <Redirect to="/" />
+            
+        }
         document.addEventListener('click', handleClickOutside, true);
         document.addEventListener('click', handleClickOutsideNavabrPopOver, true);
         document.addEventListener('click', handleClickOutsideNotificationBox, true);
         return () => document.removeEventListener('click', handleClickOutsideNotificationBox, true);
+
     }, []);
     const handleClickOutside = e => {
         if (ref.current && !ref.current.contains(e.target)) {
@@ -73,6 +81,10 @@ const Navbar = props => {
             setNavbarPopOverClass('navbar-popover')
             setCaretDir('rotate(0deg)')
         }
+    }
+    const handleLogout =e =>{
+        Cookies.remove("user");
+        return <Redirect to="/home" />
     }
     const handleForm = (e) => {
         setEmail(e.target.value);
@@ -156,7 +168,7 @@ const Navbar = props => {
                             </h5>
                             <div className={navbarPopOverClass}>
                                 <ul>
-                                    <li>Logout</li>
+                                    <li onClick={handleLogout}>Logout</li>
                                 </ul>
                             </div>
                         </div>
