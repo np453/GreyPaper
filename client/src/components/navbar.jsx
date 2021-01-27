@@ -82,8 +82,10 @@ const Navbar = props => {
             setCaretDir('rotate(0deg)')
         }
     }
-    const handleLogout =e =>{
+    const handleLogout = async e =>{
         Cookies.remove("user");
+        await axios.get(base + 'logout');
+        console.log(Cookies.get("user"))
         return <Redirect to="/home" />
     }
     const handleForm = (e) => {

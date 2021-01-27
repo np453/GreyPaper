@@ -79,6 +79,14 @@ app.get('/success', (req, res) => {
   res.send('success')
 })
 
+//logout api
+app.get('/logout', function(req, res){
+  
+  req.logout();
+  console.log("Logged out!!")
+  return res.redirect('/');
+});
+
 //google login routes
 app.get('/google/login',
   passport.authenticate('google', { scope: ['profile', 'email'] }));

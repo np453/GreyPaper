@@ -3,11 +3,11 @@ require('dotenv').config();
 const bcrypt = require('bcryptjs');
 const cookieParser = require('cookie-parser');
 const User = require('../model/user');
+const refresh = require('passport-oauth2-refresh');
+const passport = require('passport');
 
-var passport = require('passport');
-
-var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-var FacebookStrategy = require('passport-facebook').Strategy;
+const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+const FacebookStrategy = require('passport-facebook').Strategy;
 passport.use(cookieParser());
 passport.serializeUser((user, done) => {
     done(null, user);
@@ -16,48 +16,48 @@ passport.deserializeUser((user, done) => {
     done(null, user);
 })
 
-passport.use(
-    new GoogleStrategy({
-        clientID: process.env.CLIENT_ID,
-        clientSecret: process.env.CLIENT_SECRET,
-        callbackURL: "http://localhost:6161/google/callback"
-    },
-    
-    async (accessToken, refreshToken, profile, done) => {
+const strategy = new GoogleStrategy({
+    clientID: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET,
+    callbackURL: "http://localhost:6161/google/callback"
+},
 
-    const email = profile.emails[0].value;
-    const emailExist = await User.findOne({ email:email });
+async (accessToken, refreshToken, profile, done) => {
 
-    if (emailExist) {
-        return ;
-    }
-    else {
+const email = profile.emails[0].value;
+const userExist = await User.findOne({ email:email });
 
-        //Hash passwords
-        const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(profile.id + profile.displayName, salt);
+if (userExist) {
+    return done(null,userExist);
+}
+else {
 
-        const user = new User({ 
-            uname:profile.name.givenName,
-            dname:profile.displayName,
-            email:email,
-            password:hashedPassword,
-            profileImg:profile._json.picture,
-            theme:"light",
-            kind:[
-                {
-                    provider:profile.provider,
-                    id:profile.id
-                }
-            ],
-         })
-         
-        const savedUser = await user.save();
-        return done(null, savedUser)
-    }  
-        }
-)
-);
+    //Hash passwords
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(profile.id + profile.displayName, salt);
+
+    const user = new User({ 
+        uname:profile.name.givenName,
+        dname:profile.displayName,
+        email:email,
+        password:hashedPassword,
+        profileImg:profile._json.picture,
+        theme:"light",
+        kind:[
+            {
+                provider:profile.provider,
+                id:profile.id
+            }
+        ],
+     })
+     
+    const savedUser = await user.save();
+    return done(null, savedUser)
+}  
+    })
+
+passport.use(strategy);
+refresh.use(strategy);
 
 
 
@@ -82,10 +82,11 @@ passport.use( new FacebookStrategy({
     async (accessToken, refreshToken, profile, done) => {
 
     const name = profile._json.first_name;
-    const emailExist = await User.findOne({ kind: { $elemMatch : { "id" : profile.id } } });
+    const userExist = await User.findOne({ kind: { $elemMatch : { "id" : profile.id } } });
 
-    if (emailExist) {
-        return ;
+    if (userExist) {
+        
+        return done(null,userExist);
     }
     else {
 
