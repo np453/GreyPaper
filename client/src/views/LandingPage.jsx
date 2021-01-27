@@ -7,6 +7,8 @@ import brandlogo from '../assets/brandlogo.svg';
 import landingpagewall1 from '../assets/landingpagewall1.png';
 import landingpagewall2 from '../assets/landingpagewall2.png';
 import landingpagewall3 from '../assets/landingpagewall3.png';
+import landingpagewall4 from '../assets/landingpagewall4.png';
+import landingpagewall5 from '../assets/landingpagewall5.png';
 
 import googlelogo from '../assets/googlelogo.svg';
 import fblogo from '../assets/fblogo.svg';
@@ -14,6 +16,9 @@ import fblogo from '../assets/fblogo.svg';
 import BottomRow from '../components/bottomRow';
 
 import Slider from "react-slick";
+
+//import design card
+import DesignCard from '../common/designCard';
 class LandingPage extends Component {
 
     state = {
@@ -83,20 +88,36 @@ class LandingPage extends Component {
                             <div>
                                 <img className="img img-fluid" src={landingpagewall3} />     
                             </div>
+                            <div>
+                                <img className="img img-fluid" src={landingpagewall4} />     
+                            </div>
+                            <div>
+                                <img className="img img-fluid" src={landingpagewall5} />     
+                            </div>
                     </Slider>
-                    <div className="landingpagecontent">
+                    {/* <div className="landingpagecontent">
                     <h3 className="text-center">
                         We're building up the interface, which will be in service shortly!
                     </h3>
                     <h3 className="text-center mb-5">
                         Soon, You'll be able to showcase your designs and participate in design events
                     </h3>
-                    </div>
+                    </div> */}
+                    <h3 className="text-center">
+                        Start uploading your designs
+                    </h3>
                 </div>
-                    {/* <div className="login-buttons text-center">
+                    <div className="login-buttons text-center">
                         <a href="http://localhost:6161/google/login"><button className="m-2"><img src={googlelogo} className="m-1 img img-fluid" alt=""/></button></a>
                         <a href="http://localhost:6161/facebook/login"><button className="m-2"><img src={fblogo} className="m-1 img img-fluid" alt=""/></button></a>
-                    </div> */}
+                    </div>
+
+                    <h2 className="text-center">Awesome Designs!!</h2>
+                    <div className="row designs-area m-0">
+                        <div className="col-md-3 design-card">
+                            <DesignCard image={landingpagewall1} title="Image1" by="Devang Singh" instaid="dev__ang"/>
+                        </div>
+                    </div>
                 <BottomRow/>
             </div>
         );

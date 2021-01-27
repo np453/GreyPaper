@@ -52,13 +52,13 @@ function App() {
          {/* <Route path="/enter-otp" component={Otp} /> */}
 
          {/*reset password page route */}
-         {/* <Route path="/reset-password" component={ResetPass} /> */}
+         <Route path="/reset-password" component={ResetPass} />
 
          {/*reset password page route */}
-         {/* <Route path="/pay" component={Payment} /> */}
+         <Route path="/pay" component={Payment} />
 
           {/*HomePage route (when user is logged in) */}
-          {/* <Route path="/upload-design/home" component={Homepage} /> */}
+          <Route path="/home" component={Homepage} />
 
         </switch>
         </ScrollToTop>

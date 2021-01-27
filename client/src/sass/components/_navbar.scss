@@ -1,0 +1,169 @@
+// navbar component scss
+
+.navbar__container {
+    z-index: 0;
+    font-family: "Roboto";
+    background: rgba(black, 1);
+    color: rgba(white, 0.9);
+    .sideBar {
+        background-color: #081b24;
+        list-style: none;
+        position: fixed;
+        top: 0;
+        // left: 0;
+        width: 0;
+        height: 100%;
+        z-index: 1000;
+        overflow-x: hidden;
+        transition: all 0.3s;
+        .sideBar_speakers_row {
+            background-color: rgb(22, 22, 22);
+            img {
+                width: 50px;
+                height: 50px;
+            }
+        }
+        .fa-arrow-right {
+            color: rgba(white, 0.5);
+            border-radius: 50%;
+            border: 2px solid rgba(white, 0.4);
+            width: 30px;
+            height: 30px;
+            margin-left: 0.3rem;
+            transition: all 0.3s;
+            &:hover {
+                margin-left: 1rem;
+            }
+        }
+        a {
+            text-decoration: none;
+            color: rgba(white, 0.9);
+            &:hover {
+                color: rgba(white, 0.8);
+            }
+        }
+        .sideBar-item {
+            padding: 1rem;
+        }
+        .back_to_home_sideBar {
+            margin-top: 3rem;
+            font-size: 14px;
+            padding: 0.4rem;
+            text-align: center;
+            background-color: rgba(rgb(18, 45, 56), 0.5);
+            &:hover {
+                cursor: pointer;
+            }
+        }
+        .close_sidebar {
+            text-align: right;
+            .fa-times {
+                font-size: 23px;
+                padding: 0.3rem;
+                background-color: rgba(rgb(9, 13, 34), 0.9);
+                width: 30px;
+                height: 30px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+        }
+
+        hr {
+            background-color: rgba(white, 0.3);
+            height: 1px;
+            margin: 1rem auto;
+        }
+
+        //sidebar join us form
+        form {
+            margin-top: 2rem;
+            padding: 1rem;
+            border-radius: 0.3rem;
+            background-color: rgba(rgb(7, 16, 20), 0.9);
+            label {
+                color: rgba(white, 0.9);
+                font-size: 22px;
+            }
+            input {
+                background: transparent;
+                border: none;
+                outline: none !important;
+                box-shadow: none !important;
+                border-bottom: 2px solid rgba(white, 0.9) !important;
+                color: rgba(white, 0.9);
+                &:focus {
+                    border-bottom: 2px solid rgba(rgb(23, 114, 79), 0.9) !important;
+                    caret-color: white;
+                }
+            }
+            button {
+                font-size: 14px;
+                border: none;
+                border-radius: 3px;
+                background-color: rgba(rgb(28, 55, 66), 0.9);
+                color: rgba(white, 0.7);
+            }
+        }
+
+        .ecell_sidebar_title {
+            font-size: 22px;
+            color: rgba(rgb(128, 128, 128), 0.9);
+        }
+
+    }
+    .navbar-nav {
+        .nav-links {
+            font-family: "Roboto";
+            // font-weight: 600;
+        }
+
+        .fa-bell {
+            padding: 0.75rem 0 0 0.4rem;
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+}
+.icon-bar {
+    width: 2.2rem;
+    height: 0.25rem;
+    margin: 0.3rem;
+    border-radius: 6px;
+    background-color: #3e3e3e;
+    display: block;
+    transition: all 0.2s;
+    margin-top: 4px
+}
+.navbar-toggler {
+    border: none;
+    background: transparent !important;
+  }
+  
+button.navbar-toggler:focus, .navbar-toggler:active, .navbar-toggler-icon:focus{
+    outline: none !important;
+    border:none;
+    box-shadow:none;
+}
+
+@media (max-width:320px) {
+    .navbar-toggler {
+        position: absolute;
+        right: 0;
+        top: 13.6%;
+      }
+    .icon-bar {
+        width: 2rem;
+        height: 0.2rem;
+        // margin: 0.3rem;
+        border-radius: 6px;
+        background-color: #797777;
+        // display: block;
+        transition: all 0.2s;
+        // margin-top: 4px
+    }
+} 

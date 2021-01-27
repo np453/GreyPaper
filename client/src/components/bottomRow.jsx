@@ -40,7 +40,7 @@ class BottomRow extends Component {
     }
     render() {
         return (
-            <div>
+            <div className="mt-5">
                 <div className="row m-0 d-flex justify-content-around form-bottom-row">
                     <div className="col-md-6">
                         <div className="email-input form-group justify-content-center mx-auto col-md-10 d-flex flex-column">

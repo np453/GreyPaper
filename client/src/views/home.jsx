@@ -5,6 +5,9 @@ import axios from 'axios';
 import brandlogo from '../assets/brandlogo.svg';
 import homepage_cat from '../assets/homePage_cat.svg';
 import uploadbutton from '../assets/upload-button.svg';
+
+//navbar
+import Navbar from '../components/navbar';
 class Homepage extends Component {
 
 
@@ -75,11 +78,40 @@ class Homepage extends Component {
         e.target.value = null;
         this.setState({ data : { file : null } })
     }
+    navLinks = [
+        {
+            navLinkName:"Home",
+            link:"/"
+        },
+        {
+          navLinkName:"Speakers",
+          link:"/speaker"
+        },
+        {
+          navLinkName:"past sponsors",
+          link:"/sponsor"
+        },
+        {
+          navLinkName:"Meet the team",
+          link:"/team"
+        },
+      ]
 
     render() {
 
         return (
             <div>
+                <Navbar
+                    sidebarBackground="#333" 
+                    sideBarItems={this.state.sideBarItems} 
+                    navLinks={this.navLinks} 
+                    brand=""
+                    navBrandLogo={brandlogo}
+                    navbarColor="#fff" 
+                    navbarBrandColor="#fff"
+                    linkColor="#555"
+                    linkOpacity="1"
+                />
                 <div className="container">
                     <div className="row d-flex justify-content-center">
                         <img src={brandlogo} className="brandlogo img img-fluid" alt=""/>

@@ -33,6 +33,20 @@ const address = new mongoose.Schema({
 
 })
 
+//locale date and time
+const date= new Date;
+const localeDate= date.toLocaleDateString();
+const localeTime= date.toLocaleTimeString();
+
+const designUpload = new mongoose.Schema({
+    file : {
+        filename : String,
+    },
+    dateOfUpload : { type:String, default : localeDate } ,
+    timeOfUpload : { type:String, defualt : localeTime }
+
+})
+
 const User = new mongoose.Schema({
     uname:String,
     dname:String,
@@ -43,6 +57,7 @@ const User = new mongoose.Schema({
     kind:[kind],
     resetOtp:String,
     fav:[fav],
+    designUploads : [designUpload],
     recentOrders:[recentOrders],
     address:[address],
     theme:String,                //light or dark theme

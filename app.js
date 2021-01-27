@@ -80,8 +80,8 @@ app.get('/google/login',
 
 //callback route
 app.get('/google/callback', passport.authenticate('google', { failureRedirect: '/login' }), (req, res) => {
-  res.cookie("test",req.user._id);
-  res.redirect('/');
+  res.cookie("user",req.user._id);
+  res.redirect('/home');
 });
 
 //facebook login routes
@@ -89,8 +89,8 @@ app.get('/facebook/login', passport.authenticate('facebook', { scope : 'email' }
 
 //facebook callback route
 app.get('/facebook/callback', passport.authenticate('facebook', {failureRedirect: '/login' }), (req, res) => {
-  res.cookie("test",req.user._id);
-  res.redirect('/');
+  res.cookie("user",req.user._id);
+  res.redirect('/home');
 });
 
 
