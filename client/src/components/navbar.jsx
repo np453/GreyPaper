@@ -48,7 +48,6 @@ const Navbar = props => {
         if(Cookies.get("user") == undefined){
             console.log("working");
             return <Redirect to="/" />
-            
         }
         document.addEventListener('click', handleClickOutside, true);
         document.addEventListener('click', handleClickOutsideNavabrPopOver, true);
@@ -84,7 +83,7 @@ const Navbar = props => {
     }
     const handleLogout =e =>{
         Cookies.remove("user");
-        return <Redirect to="/home" />
+        return <Redirect to="/" />
     }
     const handleForm = (e) => {
         setEmail(e.target.value);

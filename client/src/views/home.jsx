@@ -46,8 +46,6 @@ class Homepage extends Component {
          if(Cookies.get("user") == undefined){
             return <Redirect to="/" />
         }
-   
-
      }
      
 
