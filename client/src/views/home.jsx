@@ -61,7 +61,7 @@ class Homepage extends Component {
 
         const data = new FormData();
         
-        data.append('email', this.state.data.email);
+        data.append('_id', "601123f866972b5550a7709a");
         data.append('file', this.state.data.file)
 
         const config = {
@@ -70,7 +70,7 @@ class Homepage extends Component {
             }
         };
 
-        const { data:resp } = await axios.post("/api/team", data, config)
+        const { data:resp } = await axios.post("http://localhost:6161/designupload/", data, config)
         console.log(resp);
     }
 

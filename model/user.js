@@ -9,6 +9,14 @@ const kind = new mongoose.Schema({
     id:String
 })
 
+const design = new mongoose.Schema({
+    file:{
+        filename:String
+    },
+    date: String,
+    id:String
+})
+
 const recentOrders = new mongoose.Schema({
     productId:String,
     paymentMethod:String,
