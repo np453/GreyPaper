@@ -1,11 +1,10 @@
 const router = require('express').Router();
-const mongoose = require('mongoose')
-const multer = require('multer')
-const fs = require('fs');
-const design = require("../model/design")
+
+const multer = require('multer');
+
 const User = require('../model/user');
 const mail = require('../model/subscriber-list');
-const bp = require('body-parser')
+
 
 //multer for image storage in public folder
 const storage = multer.diskStorage({
@@ -22,53 +21,34 @@ const upload = multer({ storage: storage }).single('file')
 
 //post request for sending gallery img
 router.post('/', upload , async(req, res) => {
-        const id= req.body._id;
-        const data = await mail.find({ emails : { $exists:true } });
-        const user= await User.findById({_id : id});
-        let img = new design({
-            file : {
-                filename:req.file.filename
-            }
-        })
-        const savedimg = await img.save();
+
+        const id = req.body._id;
+        const data = await mail.find({ design : { $exists:true } });
+       
 
         try {
-            mail.findByIdAndUpdate(id, { $push: {
-                designUploads:{
-                    "filename":req.file.filename
+            const design = await User.findByIdAndUpdate(req.body._id, {
+                $push : { 
+                    designUploads : {
+                        file : {
+                             "filename" : req.file.filename 
+                            }
+                        } 
+                    } 
+                }).exec()
+
+            const subs = mail.findByIdAndUpdate(data[0]._id, { $push: {
+                    design:{
+                        filename:req.file.filename
+                    }
                 }
-            }
-            }).exec()
+                }).exec()    
+            
     
-            return res.status(200).send("ye bhi done");
+            return res.status(200).send("success!!!");
         }catch (err) {
-            res.status(400).send(err);
+             return res.status(400).send(err);
         }
-
-
-
-        try {
-            mail.findByIdAndUpdate(data[0]._id, { $push: {
-                design:{
-                    filename:req.file.filename
-                }
-            }
-            }).exec()
-    
-            res.status(200).send("sucsess");
-        }catch (err) {
-            res.status(400).send(err);
-        }
-        
-        
-        res.send(savedimg)
-        
-          if (err instanceof multer.MulterError) {
-              return res.status(500).json(err)
-          } else if (err) {
-              return res.status(500).json(err)
-          } 
-          
           return res.status(200).send(req.file)
 });
 

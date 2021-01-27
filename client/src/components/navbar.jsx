@@ -1,7 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { Link } from 'react-router-dom';
+import Popover from '@material-ui/core/Popover';
 import axios from 'axios';
 import { base } from '../base';
+import Styled from 'styled-components';
 
 import brandlogo from '../assets/brandlogo.svg'
 
@@ -13,9 +15,25 @@ const Navbar = props => {
     const [recent, setRecent] = useState([])
     const [speaker, setSpeaker] = useState([])
     const [gallery, setGallery] = useState([])
+    const [anchorEl, setAnchorEl] = React.useState(null);
+
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
+    const open = Boolean(anchorEl);
+    const id = open ? 'simple-popover' : undefined;
+
     const [email, setEmail] = useState("")
+    const [navbarPopOverClass, setNavbarPopOverClass] = useState('navbar-popover')
+    const [caretDir, setCaretDir] = useState("rotate(0deg)")
     const ref = useRef();
     const ref1 = useRef();
+    const navbarPopOverRef = useRef();
     const toggleSideBar = () => {
         setWidth("0px")
         // setSideBarOpacity(1)
@@ -23,14 +41,11 @@ const Navbar = props => {
     const toggleSideBarClose = () => {
         setWidth("-300px")
     }
+
     useEffect(() => {
         document.addEventListener('click', handleClickOutside, true);
+        document.addEventListener('click', handleClickOutsideNavabrPopOver, true);
         document.addEventListener('click', handleClickOutsideNotificationBox, true);
-
-        axios.get('/api/recent/').then(data => { setRecent(data.data) })
-        axios.get('/api/speaker/').then(data => { setSpeaker(data.data) })
-        axios.get('/api/gallery/img').then(data => { setGallery(data.data) })
-
         return () => document.removeEventListener('click', handleClickOutsideNotificationBox, true);
     }, []);
     const handleClickOutside = e => {
@@ -51,10 +66,25 @@ const Navbar = props => {
             setOpenNotificationBox( false )
         }
     }
+    const handleClickOutsideNavabrPopOver = e => {
+
+        {/*If clicked outside of notification box, it will close*/ }
+        if (navbarPopOverRef.current && !navbarPopOverRef.current.contains(e.target)) {
+            setNavbarPopOverClass('navbar-popover')
+            setCaretDir('rotate(0deg)')
+        }
+    }
     const handleForm = (e) => {
         setEmail(e.target.value);
     }
-
+    const navbarPopOver = Styled.div`
+        list-stlye-type : "none"
+        padding: 0rem
+    `
+    const openPopOver = () => {
+        setNavbarPopOverClass('navbar-popover-open')
+        setCaretDir('rotate(180deg)')
+    }
     document.body.style.overflow = width !== "-300px" ? "hidden" : "visible"
     return (
         <div style={{backgroundColor:props.navbarColor}} className="shadow-sm navbar__container container-fluid p-0">
@@ -115,13 +145,26 @@ const Navbar = props => {
                     </div>
                     <div className="collapse navbar-collapse">
                     <div className="navbar-nav ml-auto">
-                        {props.navLinks.map(m => 
+                        {/* {props.navLinks.map(m => 
                             <Link to={m.link} className="p-2" style={{color:props.linkColor, textDecoration:"none", opacity:props.linkOpacity, fontFamily:"sans-serif"}}><div className="nav-links">{m.navLinkName}</div></Link>    
-                        )}
+                        )} */}
+                        <img className="profileImg" src={props.userimage} alt=""/>
+                        <div ref={navbarPopOverRef} className="navbar-user-logged-in" style={{ color:"black" }}>
+                            <h5 onClick={openPopOver} className="navbar-user-link">
+                                {props.user != undefined ? props.user : "user"}
+                                <i className="pl-2 fa fa-caret-up" style={{ transformOrigin:"65% 54%", transform:`${caretDir}` }} />
+                            </h5>
+                            <div className={navbarPopOverClass}>
+                                <ul>
+                                    <li>Logout</li>
+                                </ul>
+                            </div>
+                        </div>
+
                         <div className="notify_box">
                             <i onClick={toggleNotificationBox} className="fa fa-bell" aria-hidden="true" />
                             
-                            {/*Load notifications list*/}
+                            {/* Load notifications list */}
                             {openNotificationBox &&
                                     <div ref={ref1} className="notification_box">
                                         <div>

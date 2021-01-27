@@ -18,6 +18,8 @@ const path = require('path');
 const payment = require('./routes/payment');
 const email = require('./routes/email');
 const design = require('./routes/upload');
+const getUser = require('./routes/getUser');
+
 require('./routes/auth.js'); 
 
 const MongoClient = mongodb.MongoClient;
@@ -66,6 +68,7 @@ app.use(passport.session());
 app.use('/subscribers-list',email);
 app.use('/payment', payment);
 app.use('/designupload', design);
+app.use('/get-user', getUser);
 
 
 // connect to DB

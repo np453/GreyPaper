@@ -127,6 +127,94 @@
                 cursor: pointer;
             }
         }
+        .profileImg {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            padding: 0.2rem;
+            margin-right: 0.4rem;
+            border:1px solid rgb(49, 177, 170);
+        }
+        .navbar-user-logged-in {
+            display: flex;
+            align-items: center;
+            .navbar-user-link {
+                color: rgb(102, 102, 102);
+                font-family: $font-3;
+                margin-bottom: 0 !important;
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+            .navbar-popover {
+                opacity: 0;
+                position:absolute;
+                pointer-events: none;
+                transform: translateY(3.3rem);
+                width: 120px;
+                right: 0;
+                transition: all 0.3s ease;
+                background-color:white;
+                box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
+                ul {
+                    background-color: white;
+                    list-style-type: none;
+                    margin-bottom: 0.4rem !important;
+                    padding: 0 !important;
+                    li {
+                        padding: 0.3rem;
+                        &:first-child {
+                            margin-top: 0.4rem;
+                        }
+                        &:last-child {
+                            margin-bottom: 0.4rem !important;
+                        }
+                        &:hover {
+                            background-color: rgb(245, 245, 245);
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
+
+            .navbar-popover-open {
+                position: absolute;
+                transition: all 0.3s ease;
+                background-color:white;
+                box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
+                pointer-events: visible;
+                transform: translateY(2.5rem);
+                border-radius: 0.2rem;
+                width: 120px;
+                right: 0;
+                ul {
+                    background-color: white;
+                    list-style-type: none;
+                    margin-bottom: 0.4rem !important;
+                    padding: 0 !important;
+                    li {
+                        padding: 0.3rem;
+                        &:first-child {
+                            margin-top: 0.4rem;
+                        }
+                        &:last-child {
+                            margin-bottom: 0.4rem !important;
+                        }
+                        &:hover {
+                            background-color: rgb(245, 245, 245);
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
+            .fa-caret-up {
+                transition: all 0.3s;
+                // transform-origin: 50% 60%;
+            }
+        }
+
+        
+
     }
 }
 .icon-bar {

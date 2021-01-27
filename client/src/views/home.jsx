@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { base } from '../base';
+import Cookies from 'js-cookie';
 
 //importing brandlogo
 import brandlogo from '../assets/brandlogo.svg';
@@ -16,15 +18,13 @@ class Homepage extends Component {
             email:"",
             file:null
         },
+        userid:"",
+        user : [],
         showMessage:false,
         emailExist : false,
-        dataIsValid:true
+        dataIsValid:true,
     }
     
-    componentDidMount= async ()=> {
-        const data=await axios.get('http://localhost:6161/test');
-        console.log(data);
-    }
     
     handleChange = ({currentTarget:input}) => {
         const data = {...this.state.data};
@@ -33,7 +33,19 @@ class Homepage extends Component {
         this.setState({ data, dataIsValid:true });
     };
 
+     componentDidMount = async() => {
 
+         //get user id
+         const senduser = Cookies.get("user")
+         await this.setState({userid:senduser.slice(3, senduser.length-1)})
+
+         //get user
+         const { data : user } = await axios.get(base + `get-user/` + this.state.userid);
+         this.setState({ user })
+         console.log(this.state.user)
+
+     }
+     
 
     handleSubmit = async(e) => {
         
@@ -59,9 +71,11 @@ class Homepage extends Component {
 
     handleDesignFormSubmit = async(e) => {
 
+        e.preventDefault();
+
         const data = new FormData();
-        
-        data.append('_id', "601123f866972b5550a7709a");
+
+        data.append('_id', this.state.userid);
         data.append('file', this.state.data.file)
 
         const config = {
@@ -98,7 +112,9 @@ class Homepage extends Component {
       ]
 
     render() {
-
+        const username = this.state.user === undefined ? null : this.state.user.uname
+        const userimage = this.state.user === undefined ? null : this.state.user.profileImg
+        console.log(username)
         return (
             <div>
                 <Navbar
@@ -111,12 +127,11 @@ class Homepage extends Component {
                     navbarBrandColor="#fff"
                     linkColor="#555"
                     linkOpacity="1"
+                    user = {username}
+                    userimage = {userimage}
                 />
                 <div className="container">
-                    <div className="row d-flex justify-content-center">
-                        <img src={brandlogo} className="brandlogo img img-fluid" alt=""/>
-                    </div>
-                        <h1 className="mb-5 main-heading text-center">
+                        <h1 className="mb-5 mt-5 main-heading text-center">
                             It’s design<br />time !!
                             <i className="fa fa-heart fa-heart-1" aria-hidden="true"></i>
                             <i className="fa fa-heart fa-heart-2" aria-hidden="true"></i>
@@ -126,16 +141,6 @@ class Homepage extends Component {
                         <div className="d-flex justify-content-center">
                             <img src={homepage_cat} className="homepage_cat img img-fluid" alt=""/>
                         </div>
-                        <h3 className="text-center">
-                            We’re building up the store for you !!
-                        </h3>
-                        <h5 className="text-center h5-1">
-                            By the time, upload your best designs over here.<br />
-                            We’ll showcase you in our products.
-                        </h5>
-                        <h5  className="text-center h5-2">
-                            Best designs will receive a heavy discount on products
-                        </h5>
                         <div className="d-flex justify-content-center flex-column design-upload-section">
                         <div className="file-upload-wrapper">
                             <div className="p-1" style={{ border:"3px dashed #C247BD" }}>
