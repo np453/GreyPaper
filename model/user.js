@@ -9,6 +9,14 @@ const kind = new mongoose.Schema({
     id:String
 })
 
+const design = new mongoose.Schema({
+    file:{
+        filename:String
+    },
+    date: String,
+    id:String
+})
+
 const recentOrders = new mongoose.Schema({
     productId:String,
     paymentMethod:String,
@@ -43,6 +51,7 @@ const User = new mongoose.Schema({
     kind:[kind],
     resetOtp:String,
     fav:[fav],
+    design:[design],
     recentOrders:[recentOrders],
     address:[address],
     theme:String,                //light or dark theme

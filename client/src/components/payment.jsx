@@ -9,7 +9,7 @@ class Payment extends Component {
     state = {
         product : {
             name: "Pay for event",
-            price:10
+            price:100000
         }
     }
 

@@ -40,25 +40,25 @@ function App() {
           <Route path="/" exact component={LandingPage} />
 
          {/*Signup page route */}
-         {/* <Route path="/signup" component={Signup} /> */}
+         <Route path="/signup" component={Signup} />
 
          {/*Login page route */}
-         {/* <Route path="/login" component={Login} /> */}
+         <Route path="/login" component={Login} />
 
          {/*forgot password page route */}
-         {/* <Route path="/forgot-password" component={ForgotPass} /> */}
+         <Route path="/forgot-password" component={ForgotPass} />
 
          {/*enter otp page route */}
-         {/* <Route path="/enter-otp" component={Otp} /> */}
+         <Route path="/enter-otp" component={Otp} />
 
          {/*reset password page route */}
-         {/* <Route path="/reset-password" component={ResetPass} /> */}
+         <Route path="/reset-password" component={ResetPass} />
 
          {/*reset password page route */}
-         {/* <Route path="/pay" component={Payment} /> */}
+         <Route path="/pay" component={Payment} />
 
           {/*HomePage route (when user is logged in) */}
-          {/* <Route path="/upload-design/home" component={Homepage} /> */}
+          <Route path="/upload-design/home" component={Homepage} />
 
         </switch>
         </ScrollToTop>
