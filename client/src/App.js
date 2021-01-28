@@ -19,6 +19,8 @@ import Otp from './components/auth/otp';
 import ResetPass from './components/auth/resetPass';
 import Payment from './components/payment';
 
+import Policy from './components/policy';
+
 
 
 function App() {
@@ -59,6 +61,9 @@ function App() {
 
           {/*HomePage route (when user is logged in) */}
           <Route path="/home" component={Homepage} />
+
+          {/*Policy*/}
+          <Route path="/policy" component={Policy} />
 
         </switch>
         </ScrollToTop>
