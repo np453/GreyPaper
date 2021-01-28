@@ -48,8 +48,6 @@ class Homepage extends Component {
             console.log("it runs")
             Redirect();
         }
-   
-
      }
      
 
@@ -90,7 +88,7 @@ class Homepage extends Component {
             }
         };
 
-        const { data:resp } = await axios.post("http://localhost:6161/designupload/", data, config)
+        const { data:resp } = await axios.post("http://greypaper.in/designupload/", data, config)
         console.log(resp);
     }
 

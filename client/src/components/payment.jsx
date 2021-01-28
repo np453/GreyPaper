@@ -15,7 +15,7 @@ class Payment extends Component {
 
     makePayment = async(token) => {
         const payload = { product:this.state.product, token }
-        const { data:payData } = await axios.post('http://localhost:6161/payment', payload)
+        const { data:payData } = await axios.post('http://greypaper.in/payment', payload)
 
     }
     
