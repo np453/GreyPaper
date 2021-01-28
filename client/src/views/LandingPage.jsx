@@ -113,12 +113,12 @@ class LandingPage extends Component {
                         <a href={base + "facebook/login"}><button className="m-2"><img src={fblogo} className="m-1 img img-fluid" alt=""/></button></a>
                     </div>
 
-                    <h2 className="text-center">Awesome Designs!!</h2>
+                    {/* <h2 className="text-center">Awesome Designs!!</h2>
                     <div className="row designs-area m-0">
                         <div className="col-md-3 design-card">
                             <DesignCard image={landingpagewall1} title="Image1" by="Devang Singh" instaid="dev__ang"/>
                         </div>
-                    </div>
+                    </div> */}
                 <BottomRow/>
             </div>
         );
