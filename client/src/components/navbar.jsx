@@ -165,7 +165,7 @@ const Navbar = props => {
                         <div ref={navbarPopOverRef} className="navbar-user-logged-in" style={{ color:"black" }}>
                             <h5 onClick={openPopOver} className="navbar-user-link">
                                 {props.user != undefined ? props.user : "user"}
-                                <i className="pl-2 fa fa-caret-up" style={{ transformOrigin:"65% 54%", transform:`${caretDir}` }} />
+                                <i className="pl-2 fa fa-caret-down" style={{ transformOrigin:"65% 54%", transform:`${caretDir}` }} />
                             </h5>
                             <div className={navbarPopOverClass}>
                                 <ul>
