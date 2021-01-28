@@ -19,7 +19,7 @@ passport.deserializeUser((user, done) => {
 const strategy = new GoogleStrategy({
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
-    callbackURL: "http://greypaper.in/google/callback"
+    callbackURL: "https://greypaper.in/google/callback"
 },
 
 async (accessToken, refreshToken, profile, done) => {
@@ -75,7 +75,7 @@ refresh.use(strategy);
 passport.use( new FacebookStrategy({
         clientID: process.env.FACEBOOK_CLIENT_ID,
         clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-        callbackURL: "http://greypaper.in/facebook/callback",
+        callbackURL: "https://greypaper.in/facebook/callback",
         profileFields   : ['id', 'displayName', 'name', 'gender', 'picture.type(large)', 'email' ]
     },
     

@@ -88,7 +88,7 @@ class Homepage extends Component {
             }
         };
 
-        const { data:resp } = await axios.post("http://greypaper.in/designupload/", data, config)
+        const { data:resp } = await axios.post(base + "designupload/", data, config)
         console.log(resp);
     }
 

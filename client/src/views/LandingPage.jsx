@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import axios from 'axios';
+import { base } from '../base';
 import { Link } from 'react-router-dom';
 import brandlogo from '../assets/brandlogo.svg';
 
@@ -59,7 +60,7 @@ class LandingPage extends Component {
         },
     }
     handlegooglelogin= async ()=>{
-        const data = await axios.get('http://greypaper.in/google/login');
+        const data = await axios.get(base + 'google/login');
         console.log(data);
 
     }
@@ -108,8 +109,8 @@ class LandingPage extends Component {
                     </h3>
                 </div>
                     <div className="login-buttons text-center">
-                        <a href="http://greypaper.in/google/login"><button className="m-2"><img src={googlelogo} className="m-1 img img-fluid" alt=""/></button></a>
-                        <a href="http://greypaper.in/facebook/login"><button className="m-2"><img src={fblogo} className="m-1 img img-fluid" alt=""/></button></a>
+                        <a href={base + "google/login"}><button className="m-2"><img src={googlelogo} className="m-1 img img-fluid" alt=""/></button></a>
+                        <a href={base + "facebook/login"}><button className="m-2"><img src={fblogo} className="m-1 img img-fluid" alt=""/></button></a>
                     </div>
 
                     <h2 className="text-center">Awesome Designs!!</h2>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import axios from 'axios';
+import { base } from '../base';
 
 import StripeCheckout from 'react-stripe-checkout';
 
@@ -15,7 +16,7 @@ class Payment extends Component {
 
     makePayment = async(token) => {
         const payload = { product:this.state.product, token }
-        const { data:payData } = await axios.post('http://greypaper.in/payment', payload)
+        const { data:payData } = await axios.post(base + 'payment', payload)
 
     }
     

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { base } from '../base';
 
 class BottomRow extends Component {
 
@@ -32,7 +33,7 @@ class BottomRow extends Component {
             email : this.state.data.email
         }
 
-        const data = await axios.post('/subscribers-list', payload);
+        const data = await axios.post(base + 'subscribers-list', payload);
 
         if (data.data === "Email registered!!") this.setState({ showMessage : true })
         else if ( data.data === "Email already exists" ) this.setState({ emailExist : true })
