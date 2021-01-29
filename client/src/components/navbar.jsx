@@ -7,6 +7,8 @@ import Styled from 'styled-components';
 import Cookies from 'js-cookie';
 import {Redirect} from 'react-router-dom';
 
+import notifications from '../assets/notifications.svg';
+
 
 import { useHistory } from 'react-router-dom'
 import brandlogo from '../assets/brandlogo.svg'
@@ -48,10 +50,6 @@ const Navbar = props => {
     }
 
     useEffect(() => {
-        if(Cookies.get("user") == undefined){
-            console.log("working");
-            return <Redirect to="/" />
-        }
         document.addEventListener('click', handleClickOutside, true);
         document.addEventListener('click', handleClickOutsideNavabrPopOver, true);
         document.addEventListener('click', handleClickOutsideNotificationBox, true);
@@ -78,7 +76,7 @@ const Navbar = props => {
     }
     const handleClickOutsideNavabrPopOver = e => {
 
-        {/*If clicked outside of notification box, it will close*/ }
+        {/*If clicked outside of popover , it will close*/ }
         if (navbarPopOverRef.current && !navbarPopOverRef.current.contains(e.target)) {
             setNavbarPopOverClass('navbar-popover')
             setCaretDir('rotate(0deg)')
@@ -150,7 +148,7 @@ const Navbar = props => {
                     <Link to="/contact"><li className="sideBar-item">Get in touch</li></Link> 
                     <Link to="/"><h6 className="back_to_home_sideBar"><span>Back to Home</span></h6></Link>
                 </ul>
-                <div className={"container " + "navbar-"+props.position}>
+                <div className={"container-fluid " + "navbar-"+props.position}>
                 <nav className={"navbar navbar-expand-lg " + "navbar-"+props.position}>
                     <div className="navbar-brand" style={{color:props.navbarBrandColor}}>
                     <img src={props.navBrandLogo} style={{ pointerEvents:"none" }} alt=""/>
@@ -162,7 +160,7 @@ const Navbar = props => {
                             <Link to={m.link} className="p-2" style={{color:props.linkColor, textDecoration:"none", opacity:props.linkOpacity, fontFamily:"sans-serif"}}><div className="nav-links">{m.navLinkName}</div></Link>    
                         )} */}
                         <img className="profileImg" src={props.userimage} alt=""/>
-                        <div ref={navbarPopOverRef} className="navbar-user-logged-in" style={{ color:"black" }}>
+                        <div ref={navbarPopOverRef} className="navbar-user-logged-in mr-4" style={{ color:"black" }}>
                             <h5 onClick={openPopOver} className="navbar-user-link">
                                 {props.user != undefined ? props.user : "user"}
                                 <i className="pl-2 fa fa-caret-down" style={{ transformOrigin:"65% 54%", transform:`${caretDir}` }} />
@@ -175,8 +173,12 @@ const Navbar = props => {
                         </div>
 
                         <div className="notify_box">
-                            <i onClick={toggleNotificationBox} className="fa fa-bell" aria-hidden="true" />
                             
+                            {/* navbar notification icon */}
+                            <div  className="d-flex justify-content-center align-items-center">
+                                <i style={{ backgroundColor:openNotificationBox ? "#EFEFEF" : null }} onClick={toggleNotificationBox} className="fa fa-inbox" aria-hidden="true" />
+                            </div>
+
                             {/* Load notifications list */}
                             {openNotificationBox &&
                                     <div ref={ref1} className="notification_box">

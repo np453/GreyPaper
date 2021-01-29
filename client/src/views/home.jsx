@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
+import {Redirect} from 'react-router-dom';
+
 import axios from 'axios';
 import { base } from '../base';
+
+//import cookie
 import Cookies from 'js-cookie';
-import {Redirect} from 'react-router-dom';
 
 //importing brandlogo
 import brandlogo from '../assets/brandlogo.svg';
-import homepage_cat from '../assets/homePage_cat.svg';
 import uploadbutton from '../assets/upload-button.svg';
 
 //navbar
@@ -17,20 +19,26 @@ class Homepage extends Component {
     state = {
         data : {
             email:"",
-            file:null
+            file:null,
+            fileUrl:""
         },
         userid:"",
         user : [],
         showMessage:false,
         emailExist : false,
         dataIsValid:true,
+        dashboardState : "dashboard-sidebar-open",
+        dashboardContentState : "dashboard-content-when-sidebar-open",
     }
     
     
     handleChange = ({currentTarget:input}) => {
         const data = {...this.state.data};
         data[input.name] = input.value;
-        if(input.name === 'file')data[input.name] = input.files[0]
+        if(input.name === 'file'){
+            data[input.name] = input.files[0]
+            data["fileUrl"] = URL.createObjectURL(input.files[0])
+        }
         this.setState({ data, dataIsValid:true });
     };
 
@@ -96,33 +104,33 @@ class Homepage extends Component {
         e.target.value = null;
         this.setState({ data : { file : null } })
     }
-    navLinks = [
-        {
-            navLinkName:"Home",
-            link:"/"
-        },
-        {
-          navLinkName:"Speakers",
-          link:"/speaker"
-        },
-        {
-          navLinkName:"past sponsors",
-          link:"/sponsor"
-        },
-        {
-          navLinkName:"Meet the team",
-          link:"/team"
-        },
-      ]
+
+    closeDashBoardSideBar = () => {
+
+        //if sidebar is open then close it else if it is closed then open it
+        this.state.dashboardState === "dashboard-sidebar-open" ?  
+        this.setState({ dashboardState:"dashboard-sidebar-close" }) :
+        this.setState({ dashboardState:"dashboard-sidebar-open" })
+
+        //if sidebar is close then shift the content to left else keep it as it is
+        this.state.dashboardContentState === "dashboard-content-when-sidebar-open" ?
+         this.setState({ dashboardContentState:"dashboard-content-when-sidebar-close" }) :
+         this.setState({ dashboardContentState:"dashboard-content-when-sidebar-open" })
+    }
 
     render() {
+        const imageIsPresent = this.state.data.file != null ? true : false;
+
         const username = this.state.user === undefined ? null : this.state.user.uname
         const userimage = this.state.user === undefined ? null : this.state.user.profileImg
+
         if(Cookies.get("user") === undefined){
             return <Redirect to="/" />
         }
+
         return (
-            <div>
+
+            <div className="">
                 <Navbar
                     sidebarBackground="#333" 
                     sideBarItems={this.state.sideBarItems} 
@@ -136,7 +144,57 @@ class Homepage extends Component {
                     user = {username}
                     userimage = {userimage}
                 />
-                <div className="container">
+                <div style={{ backgroundColor:"#FAFAFA" }} className="row dashboard m-0">
+                <div className={'col-md-2 dashboard-sidebar '+this.state.dashboardState}>
+                    <div className="dashboard-file-upload text-center">
+                        <label htmlFor="file" className="mt-3 file-upload-button"><img className="mr-1" src={uploadbutton} style={{ width:"23px" }} alt=""/>upload</label>
+                        <input onChange={this.handleChange} name="file" id="file" className="file-upload" hidden type="file"/>
+                    </div>
+                    <ul>
+                        <li>Recent Uploads</li>
+                        <li>top designs</li>
+                        <li>visit gallery</li>
+                        <li>view saved items</li>
+                    </ul>
+                        <button onClick={this.closeDashBoardSideBar} className="hamBurger p-2">
+                            <div className="">
+                                <span class="icon-bar top-bar" style={{ height: "0.25rem" }}></span>
+                                <span class="icon-bar middle-bar" style={{ height: "0.25rem" }}></span>
+                                <span class="icon-bar bottom-bar" style={{ height: "0.25rem" }}></span>
+                            </div>
+                        </button>
+                </div>
+                <div className={'dashboard-content '+this.state.dashboardContentState}>
+
+                    {imageIsPresent && <div className="d-flex filters-for-image-uploaded">
+                        <span>Blur</span>
+                        <span>Implode</span>
+                        <span>Contrast</span>
+                        <span>colorize</span>
+                        <span>equalize</span>
+                        <span>sepia</span>
+                        <span>swirl</span>
+                        <span>rotate</span>
+                        <span>rotate-edge</span>
+                        <span>flip-rotate-edge</span>
+                    </div>
+                    }
+
+                    {/* Image */}
+                    <div style={{ display:imageIsPresent === false ? "none" : null }}>
+                        <div className="dashboard-image-showcase-section">
+                            <div className="image-wrapper">
+                                <img className=" img-fluid img dashboard-uploaded-design" src={this.state.data.fileUrl} alt=""/>
+                            </div>
+                        </div>
+                        <div className="text-center">
+                            <button className="image-effects-final-to-submit">Save changes</button>
+                        </div>
+                    </div> 
+                </div>
+                </div>
+                        
+                {/* <div className="container">
                         <h1 className="mb-5 mt-5 main-heading text-center">
                             It’s design<br />time !!
                             <i className="fa fa-heart fa-heart-1" aria-hidden="true"></i>
@@ -207,7 +265,7 @@ class Homepage extends Component {
                         </div>
                         
                     </div>
-                </div>
+                </div> */}
             </div>
         );
     }

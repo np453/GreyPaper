@@ -1,0 +1,151 @@
+.dashboard {
+
+    .dashboard-content {
+        width: 83.3%;
+        display: flex;
+        flex-direction: column;
+
+        .filters-for-image-uploaded {
+            display: flex;
+            justify-content: center;
+            span {
+                margin: 0.2rem;
+                padding: 0.2rem 0.6rem;
+                background-color: #ececec;
+                border-radius: 0.24rem;
+                transition: all 150ms ease;
+                &:hover {
+                    cursor: pointer;
+                    background-color: #d3d3d3;
+                }
+            }
+        }
+
+        .image-effects-final-to-submit {
+            border: none;
+            background-color: transparent;
+            margin-top: 1rem;
+            border: 3px solid #434C9B;
+            border-radius: 0.2rem;
+            color: #434C9B;
+            transition: all 0.3s;
+            &:hover {
+                background-color: rgb(247, 247, 247);
+                box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
+            }
+            &:focus {
+                box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 2px 0px, rgba(14, 30, 37, 0.32) 0px 2px 8px 0px;
+            }
+        }
+    }
+
+    //image showcase section (when an image is uploaded)
+    .dashboard-image-showcase-section {
+        display: flex;
+        justify-content: center;
+        .image-wrapper {
+            
+            margin-top: 2rem;
+            border-radius: 1rem;
+            width: 50%;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+        }
+        .dashboard-uploaded-design {
+            border-radius: 1rem;
+        }
+
+    }
+
+    .dashboard-sidebar {
+        border-right: 1px solid #e3e3e3;
+        background-color: white;
+        height: 100vh;
+    }
+    .hamBurger {
+        background: transparent;
+        -webkit-appearance: button;
+        overflow: visible;
+        text-transform: none;
+
+        border: none;
+        position: absolute;
+        z-index: 1000;
+        right: -4.8rem;
+        transition: all 0.3s;
+        top: 0;
+        &:hover {
+            cursor: pointer;
+        }
+        &:focus {
+            transform: scale(0.9);
+        }
+        &:active {
+            transform: scale(0.95);
+        }
+        &:visited {
+            transform: scale(0.1);
+        }
+    }
+
+    .file-upload-button {
+        border: none;
+        background: transparent;
+        margin: 0 auto;
+        border: 3px solid #434C9B;
+        border-radius: 0.2rem;
+        width: 80%;
+        color: #434C9B;
+        font-family: "Roboto";
+        transition: all 0.3s;
+        &:hover {
+            transform: scale(0.97);
+            cursor: pointer;
+        }
+    }
+
+    ul {
+        list-style: none;
+        padding: 1rem !important;
+        li {
+            padding: 0.3rem;
+            font-family: $font-5;
+            transition: all 100ms ease-in-out 0s;
+            border-radius: 0.2rem;
+            &:hover {
+                cursor: pointer;
+                background-color: rgb(243, 243, 243);
+            }
+
+        }
+    }
+    .dashboard-sidebar-open {
+        width: 28%;
+        transition: all 0.3s;
+        // overflow-x: hidden;
+    
+    }
+    .dashboard-sidebar-close {
+        width: 0%; 
+        transition: all 0.3s;
+        transform: translateX(-100%);
+        // overflow-x: hidden;
+    
+    }
+    .dashboard-content-when-sidebar-open {
+        transition: all 0.3s;
+        margin-top: 1.5rem;
+    }
+    .dashboard-content-when-sidebar-close {
+        display: flex;
+        margin-top: 1.5rem;
+        width: 66%;
+        // justify-content: center;
+        transition: all 0.3s;
+        // transform: translateX(-100%);
+    }
+}
+
+
+.dashboard-sidebar {
+    
+}

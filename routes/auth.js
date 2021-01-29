@@ -6,6 +6,8 @@ const User = require('../model/user');
 const refresh = require('passport-oauth2-refresh');
 const passport = require('passport');
 
+const base = "http://localhost:6161/"
+
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
 passport.use(cookieParser());
@@ -19,7 +21,7 @@ passport.deserializeUser((user, done) => {
 const strategy = new GoogleStrategy({
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
-    callbackURL: "https://greypaper.in/google/callback"
+    callbackURL: base + "google/callback"
 },
 
 async (accessToken, refreshToken, profile, done) => {
@@ -75,7 +77,7 @@ refresh.use(strategy);
 passport.use( new FacebookStrategy({
         clientID: process.env.FACEBOOK_CLIENT_ID,
         clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-        callbackURL: "https://greypaper.in/facebook/callback",
+        callbackURL: base + "facebook/callback",
         profileFields   : ['id', 'displayName', 'name', 'gender', 'picture.type(large)', 'email' ]
     },
     
