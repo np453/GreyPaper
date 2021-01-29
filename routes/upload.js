@@ -53,18 +53,18 @@ router.post('/', upload , async(req, res) => {
 });
 
 //get request for gallery img
-//  router.get('/', async(req, res) => {
-//      const user= await User.findById({_id : req.body._id});
-//      console.log(user);
-//   const imData = await design.find({ })
-//   const img = [];
-//   for(let i=0;i<imData.length;i++) {
-//     img.push( {_id:imData[i]._id,route:"gallery",filename:imData[i].file.filename} )
-//   }
+ router.get('/', async(req, res) => {
+     const user= await User.findById({_id : req.body._id});
+     console.log(user);
+  const imData = await design.find({ })
+  const img = [];
+  for(let i=0;i<imData.length;i++) {
+    img.push( {_id:imData[i]._id,route:"gallery",filename:imData[i].file.filename} )
+  }
 
-//   res.send(img)
-// res.send("test")
-// });
+  res.send(img)
+res.send("test")
+});
 
 // delete request for gallery api using mongo object id
 // router.put('/delete/:id',async(req,res)=>{
