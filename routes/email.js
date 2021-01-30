@@ -13,7 +13,6 @@ router.post('/' , async( req, res ) => {
     
 
     const data = await mail.find({ emails : { $exists:true } });
-    // console.log(data[0]._id)
 
     const ifMailExist = await mail.findOne({ emails : { $elemMatch : { "email" : req.body.email  } } });
     if (ifMailExist) return res.send("Email already exists");
@@ -38,26 +37,29 @@ router.post('/' , async( req, res ) => {
 
 //     }
 //     MongoClient.connect(url, function(err, db) {
+
 //         if (err) throw err;
+
 //         var dbo = db.db("greyPaper");
+
 //         var myobj = { email:req.body.email };
+
 //         dbo.collection("subscribers").insertOne(myobj, function(err, res) {
 //           if (err) throw err;
-//           console.log("email registered");
 //           db.close();
 //         });
+
 //       });
+
+//       return res.status(200).send("Email registered!!")
 // })
 
 
 // get route for email data
 router.get('/', async(req, res) => {
-const allcontacts = await mail.find({ })
-const contacts = [];
-for(let i=0;i<allcontacts[0].emails.length;i++) {
-contacts.push( {_id:allcontacts[0].emails[i]._id,route:"contact",email:allcontacts[0].emails[i].email} )
-}
-res.send(allcontacts)
+
+    const allcontacts = await mail.find({ })
+    res.send(allcontacts)
 
 });
 
