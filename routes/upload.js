@@ -5,6 +5,10 @@ const multer = require('multer');
 const User = require('../model/user');
 const mail = require('../model/subscriber-list');
 
+const mongodb = require("mongodb");
+
+var MongoClient = mongodb.MongoClient;
+var url = "mongodb://localhost:27017/greyPaper";
 
 //multer for image storage in public folder
 const storage = multer.diskStorage({
@@ -22,7 +26,20 @@ const upload = multer({ storage: storage }).single('file')
 //post request for sending gallery img
 router.post('/', upload , async(req, res) => {
 
-        const id = req.body._id;
+        MongoClient.connect(url, function(err, db) {
+
+          if (err) throw err;
+
+          var dbo = db.db("greyPaper");
+
+          var myobj = { filename:req.body.filename };
+
+          dbo.collection("designs").insertOne(myobj, function(err, res) {
+            if (err) throw err;
+            db.close(); 
+          });
+
+        });
         const data = await mail.find({ design : { $exists:true } });
        
 
@@ -53,17 +70,11 @@ router.post('/', upload , async(req, res) => {
 });
 
 //get request for gallery img
- router.get('/', async(req, res) => {
-     const user= await User.findById({_id : req.body._id});
-     console.log(user);
-  const imData = await design.find({ })
-  const img = [];
-  for(let i=0;i<imData.length;i++) {
-    img.push( {_id:imData[i]._id,route:"gallery",filename:imData[i].file.filename} )
-  }
-
-  res.send(img)
-res.send("test")
+ router.get('/:id', async(req, res) => {
+      const user= await User.findById({_id : req.params.id});
+      console.log(user);
+      
+      res.send(img)
 });
 
 // delete request for gallery api using mongo object id

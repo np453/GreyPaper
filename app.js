@@ -64,6 +64,15 @@ MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, (e
     db.close();
   });
 });
+MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, (err, db) => {
+  if (err) throw err;
+  var dbo = db.db("greyPaper");
+  dbo.createCollection("designs", function(err, res) {
+    if (err) throw err;
+    console.log("Collection created!");
+    db.close();
+  });
+});
 
 app.use('*', function(req, res, next) {
 //replace localhost:8080 to the ip address:port of your server
