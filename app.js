@@ -1,36 +1,60 @@
+//for reading environment variables
 const dotenv = require('dotenv');
-require('dotenv').config();
+dotenv.config();
 
 const express= require('express');
+const path = require('path');
+
+//create express app
 const app= express();
-const multer = require('multer')
+
+//for cross browser access
 const cors = require('cors');
+
+//for SES configuration
 const AWS = require('aws-sdk');
+
+//login system library
 const passport = require('passport');
-const mongoose = require('mongoose');
-const mongodb = require("mongodb");
+
+//to parse json data
 const bodyParser = require('body-parser');
+
+//cookie libraries
 const cookieParser = require('cookie-parser'); 
 const cookieSession = require('cookie-session')
 
-const path = require('path');
+const fileupload = require("express-fileupload");
 
+//database libraries
+const mongoose = require('mongoose');
+const mongodb = require("mongodb");
+
+//routes
 const payment = require('./routes/payment');
 const email = require('./routes/email');
 const design = require('./routes/upload');
 const getUser = require('./routes/getUser');
+const filter = require('./routes/filter');
 
+//Port
+const PORT = 6161;
+
+//importing login system
 require('./routes/auth.js'); 
 
+//mongodb install on system required to declare a mongoClient
 const MongoClient = mongodb.MongoClient;
 const url = "mongodb://localhost:27017/greyPaper";
 
+//creating the database (using mongodb version 3.3.3, to fix createCollection error)
 MongoClient.connect(url,{ useNewUrlParser: true, useUnifiedTopology: true }, (err, db) => {
   if (err) throw err;
   console.log("Database created!");
   db.close();
 });
 
+//creating a collection
 MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, (err, db) => {
   if (err) throw err;
   var dbo = db.db("greyPaper");
@@ -41,14 +65,17 @@ MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, (e
   });
 });
 
+app.use('*', function(req, res, next) {
+//replace localhost:8080 to the ip address:port of your server
+res.header("Access-Control-Allow-Origin", "http://localhost:6161");
+res.header("Access-Control-Allow-Headers", "X-Requested-With");
+res.header('Access-Control-Allow-Headers', 'Content-Type');
+res.header('Access-Control-Allow-Credentials', true);
+next(); 
+});
 
-
-//Port
-const PORT = 6161;
-
-//.env file
-dotenv.config();
-
+//enable pre-flight
+app.options('*', cors());
 
 //Middlewaress
 app.use(bodyParser.json());
@@ -60,15 +87,20 @@ app.use(cookieSession({
   name: 'session',
   keys: ['key1', 'key2']
 }))
+app.use(fileupload());
 
+//login system middleware
 app.use(passport.initialize());
 app.use(passport.session());
 // app.use(cookie());
 
+
+//routes
 app.use('/subscribers-list',email);
 app.use('/payment', payment);
 app.use('/designupload', design);
 app.use('/get-user', getUser);
+app.use('/upload', filter)
 
 
 // connect to DB

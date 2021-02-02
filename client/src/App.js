@@ -74,3 +74,8 @@ function App() {
 }
 
 export default App;
+
+
+// "start": "set PORT=3001 && react-scripts start",
+//     "build": "react-scripts build",
+//     "test": "react-scripts test",

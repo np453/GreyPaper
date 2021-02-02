@@ -13,6 +13,9 @@ import uploadbutton from '../assets/upload-button.svg';
 
 //navbar
 import Navbar from '../components/navbar';
+
+//using pug in react
+//https://github.com/pugjs/babel-plugin-transform-react-pug#syntax
 class Homepage extends Component {
 
 
@@ -37,7 +40,7 @@ class Homepage extends Component {
         data[input.name] = input.value;
         if(input.name === 'file'){
             data[input.name] = input.files[0]
-            data["fileUrl"] = URL.createObjectURL(input.files[0])
+            // data["fileUrl"] = URL.createObjectURL(input.files[0])
         }
         this.setState({ data, dataIsValid:true });
     };
@@ -118,15 +121,37 @@ class Homepage extends Component {
          this.setState({ dashboardContentState:"dashboard-content-when-sidebar-open" })
     }
 
+    applyFilter = async() => {
+
+        const payload = new FormData();        
+        payload.append('file', this.state.data.file);
+
+        const config = {
+            headers: {
+                'content-type': 'multipart/form-data',
+            }
+        };
+
+        const {data : res} = await axios.post(base + 'upload/', payload, config)
+
+        // if (res.status === 200) console.log("image upload works!!") 
+        // else {
+        //     console.log("image upload failed !!", res.status)
+        // }
+        console.log(res)
+    }
+
     render() {
         const imageIsPresent = this.state.data.file != null ? true : false;
-
+        console.log(this.state.data.file)
         const username = this.state.user === undefined ? null : this.state.user.uname
         const userimage = this.state.user === undefined ? null : this.state.user.profileImg
 
         if(Cookies.get("user") === undefined){
             return <Redirect to="/" />
         }
+
+        const name = this.state.data.file === null ? [] : this.state.data.file.name
 
         return (
 
@@ -148,7 +173,7 @@ class Homepage extends Component {
                 <div className={'col-md-2 dashboard-sidebar '+this.state.dashboardState}>
                     <div className="dashboard-file-upload text-center">
                         <label htmlFor="file" className="mt-3 file-upload-button"><img className="mr-1" src={uploadbutton} style={{ width:"23px" }} alt=""/>upload</label>
-                        <input onChange={this.handleChange} name="file" id="file" className="file-upload" hidden type="file"/>
+                        <input enctype="multipart/form-data" onChange={this.handleChange} name="file" id="file" className="file-upload" hidden type="file"/>
                     </div>
                     <ul>
                         <li>Recent Uploads</li>
@@ -172,7 +197,7 @@ class Homepage extends Component {
                         <span>Contrast</span>
                         <span>colorize</span>
                         <span>equalize</span>
-                        <span>sepia</span>
+                        <span onClick={this.applyFilter}>sepia</span>
                         <span>swirl</span>
                         <span>rotate</span>
                         <span>rotate-edge</span>
@@ -185,6 +210,7 @@ class Homepage extends Component {
                         <div className="dashboard-image-showcase-section">
                             <div className="image-wrapper">
                                 <img className=" img-fluid img dashboard-uploaded-design" src={this.state.data.fileUrl} alt=""/>
+                                
                             </div>
                         </div>
                         <div className="text-center">
@@ -193,7 +219,23 @@ class Homepage extends Component {
                     </div> 
                 </div>
                 </div>
-                        
+                <figure class="bg-gray-100 rounded-xl p-8">
+                    <img class="w-32 h-32 rounded-full mx-auto" src="/sarah-dayan.jpg" alt="" width="384" height="512" />
+                    <div class="pt-6 space-y-4">
+                        <blockquote>
+                        <p class="text-lg font-semibold">
+                            “Tailwind CSS is the only framework that I've seen scale
+                            on large teams. It’s easy to customize, adapts to any design,
+                            and the build size is tiny.”
+                        </p>
+                        </blockquote>
+                        <figcaption class="font-medium">
+                        <div class="text-cyan-600">
+                            Sarah Dayan
+                        </div>
+                        </figcaption>
+                    </div>
+                    </figure>    
                 {/* <div className="container">
                         <h1 className="mb-5 mt-5 main-heading text-center">
                             It’s design<br />time !!
