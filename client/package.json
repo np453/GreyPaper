@@ -13,6 +13,7 @@
     "axios": "^0.21.1",
     "babel-plugin-transform-react-pug": "^7.0.1",
     "bootstrap": "^4.6.0",
+    "chroma-js": "^2.1.0",
     "font-awesome": "^4.7.0",
     "framer-motion": "^3.2.1",
     "gsap": "^3.6.0",
@@ -25,6 +26,7 @@
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
+    "react-select": "^4.0.2",
     "react-slick": "^0.27.14",
     "react-stripe-checkout": "^2.6.3",
     "react-toastify": "^6.2.0",
@@ -38,9 +40,9 @@
     "web-vitals": "^0.2.4"
   },
   "scripts": {
-    "start": "craco start",
-     "build": "craco build",
-     "test": "craco test",
+    "start": "set PORT=3001 && react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

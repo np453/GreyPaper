@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import {Redirect} from 'react-router-dom';
 
+import Styled from 'styled-components';
+
+import Select from 'react-select'
+import makeAnimated from 'react-select/animated';
+
 import axios from 'axios';
 import { base } from '../base';
 
@@ -16,6 +21,8 @@ import Navbar from '../components/navbar';
 
 //using pug in react
 //https://github.com/pugjs/babel-plugin-transform-react-pug#syntax
+
+const animatedComponents = makeAnimated();
 class Homepage extends Component {
 
 
@@ -26,10 +33,12 @@ class Homepage extends Component {
             fileUrl:""
         },
         userid:"",
+        instaUser : "@gpapers99",
         user : [],
         showMessage:false,
         emailExist : false,
         dataIsValid:true,
+        sideBarState:"open",
         dashboardState : "dashboard-sidebar-open",
         dashboardContentState : "dashboard-content-when-sidebar-open",
     }
@@ -40,7 +49,7 @@ class Homepage extends Component {
         data[input.name] = input.value;
         if(input.name === 'file'){
             data[input.name] = input.files[0]
-            // data["fileUrl"] = URL.createObjectURL(input.files[0])
+            data["fileUrl"] = URL.createObjectURL(input.files[0])
         }
         this.setState({ data, dataIsValid:true });
     };
@@ -59,6 +68,8 @@ class Homepage extends Component {
             console.log("it runs")
             Redirect();
         }
+
+        
      }
      
 
@@ -112,8 +123,8 @@ class Homepage extends Component {
 
         //if sidebar is open then close it else if it is closed then open it
         this.state.dashboardState === "dashboard-sidebar-open" ?  
-        this.setState({ dashboardState:"dashboard-sidebar-close" }) :
-        this.setState({ dashboardState:"dashboard-sidebar-open" })
+        this.setState({ dashboardState:"dashboard-sidebar-close", sideBarState:"close" }) :
+        this.setState({ dashboardState:"dashboard-sidebar-open", sideBarState:"open" })
 
         //if sidebar is close then shift the content to left else keep it as it is
         this.state.dashboardContentState === "dashboard-content-when-sidebar-open" ?
@@ -141,6 +152,22 @@ class Homepage extends Component {
         console.log(res)
     }
 
+    noFileUploaded = Styled.div`
+    color:#CACACA;
+    font-weight:400;
+    font-family:'Roboto';
+    font-size:32px;
+    `
+    tags = [
+        { value: 'automotive', label: 'automotive' },
+        { value: 'coding', label: 'coding' },
+        { value: 'motivational', label: 'motivational' },
+        { value: 'food', label: 'food' },
+        { value: 'travel', label: 'travel' },
+        { value: 'sports', label: 'sports' },
+        { value: 'vintage', label: 'vintage' },
+      ]
+
     render() {
         const imageIsPresent = this.state.data.file != null ? true : false;
         console.log(this.state.data.file)
@@ -152,7 +179,7 @@ class Homepage extends Component {
         }
 
         const name = this.state.data.file === null ? [] : this.state.data.file.name
-
+        const imagePreview = this.state.data.fileUrl
         return (
 
             <div className="">
@@ -170,7 +197,7 @@ class Homepage extends Component {
                     userimage = {userimage}
                 />
                 <div style={{ backgroundColor:"#FAFAFA" }} className="row dashboard m-0">
-                <div className={'col-md-2 dashboard-sidebar '+this.state.dashboardState}>
+                <div className={'col-md-2 col-md-offset-2 dashboard-sidebar '+this.state.dashboardState}>
                     <div className="dashboard-file-upload text-center">
                         <label htmlFor="file" className="mt-3 file-upload-button"><img className="mr-1" src={uploadbutton} style={{ width:"23px" }} alt=""/>upload</label>
                         <input enctype="multipart/form-data" onChange={this.handleChange} name="file" id="file" className="file-upload" hidden type="file"/>
@@ -181,17 +208,18 @@ class Homepage extends Component {
                         <li>visit gallery</li>
                         <li>view saved items</li>
                     </ul>
-                        <button onClick={this.closeDashBoardSideBar} className="hamBurger p-2">
+                        {false && <button style={{ backgroundColor:this.state.sideBarState === "close" ? "#ECECEC" : null , borderRadius:"10%" }} onClick={this.closeDashBoardSideBar} className="hamBurger p-2">
                             <div className="">
                                 <span class="icon-bar top-bar" style={{ height: "0.25rem" }}></span>
                                 <span class="icon-bar middle-bar" style={{ height: "0.25rem" }}></span>
                                 <span class="icon-bar bottom-bar" style={{ height: "0.25rem" }}></span>
                             </div>
-                        </button>
+                        </button>}
                 </div>
                 <div className={'dashboard-content '+this.state.dashboardContentState}>
 
-                    {imageIsPresent && <div className="d-flex filters-for-image-uploaded">
+                    {imageIsPresent && false && 
+                    <div className="d-flex filters-for-image-uploaded">
                         <span>Blur</span>
                         <span>Implode</span>
                         <span>Contrast</span>
@@ -206,36 +234,60 @@ class Homepage extends Component {
                     }
 
                     {/* Image */}
-                    <div style={{ display:imageIsPresent === false ? "none" : null }}>
-                        <div className="dashboard-image-showcase-section">
-                            <div className="image-wrapper">
-                                <img className=" img-fluid img dashboard-uploaded-design" src={this.state.data.fileUrl} alt=""/>
-                                
-                            </div>
-                        </div>
-                        <div className="text-center">
-                            <button className="image-effects-final-to-submit">Save changes</button>
-                        </div>
-                    </div> 
-                </div>
-                </div>
-                <figure class="bg-gray-100 rounded-xl p-8">
-                    <img class="w-32 h-32 rounded-full mx-auto" src="/sarah-dayan.jpg" alt="" width="384" height="512" />
-                    <div class="pt-6 space-y-4">
-                        <blockquote>
-                        <p class="text-lg font-semibold">
-                            “Tailwind CSS is the only framework that I've seen scale
-                            on large teams. It’s easy to customize, adapts to any design,
-                            and the build size is tiny.”
-                        </p>
-                        </blockquote>
-                        <figcaption class="font-medium">
-                        <div class="text-cyan-600">
-                            Sarah Dayan
-                        </div>
-                        </figcaption>
+                    {imagePreview === "" ? 
+                    
+                    <div className="d-flex justify-content-center">
+                        <this.noFileUploaded>
+                            No file uloaded
+                            <div className="text-center upload-first-file">
+                                <label htmlFor="file" className="mt-3">upload</label> a file
+                                <input enctype="multipart/form-data" onChange={this.handleChange} name="file" id="file" className="file-upload" hidden type="file"/>
+                            </div>    
+                        </this.noFileUploaded>
                     </div>
-                    </figure>    
+                    :
+                    <div className="container-fluid m-0">
+                        <div className="row m-0">
+                            <div className="col-md-8 p-0">
+                                <div style={{ display:imageIsPresent === false ? "none" : null }}>
+                                    <div className="dashboard-image-showcase-section">
+                                        <div className="image-wrapper">
+                                            <img style={{ pointerEvents:"none" }} className=" img-fluid img dashboard-uploaded-design" src={imagePreview} alt=""/>
+                                        </div>                                      
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="col-md-3 p-0">
+                                <div className="d-flex justify-content-center flex-column p-4 design-description-section">
+                                    <h5 style={{ color:"#707070" }}>What people will see</h5>
+                                    <input className="p-2 insta-user-id" placeholder="your instagram id" type="text"/>
+                                    <textarea 
+                                    placeholder="describe your design in few words" 
+                                    name="designDescription" 
+                                    id="designDescription" 
+                                    cols="30" rows="8" />
+                                    <Select 
+                                    closeMenuOnSelect={false}
+                                    components={animatedComponents}
+                                    isMulti
+                                    className="mt-3" 
+                                    options={this.tags} />
+                                    <p className="mt-3 text-center p-2" style={{ background:"#FCDEFF", borderRadius:"2rem" }}>Tag us to showcase and sell your designs 
+                                    <a style={{ color:"#444" }} href={"https://instagram.com/" + this.state.instaUser}><span className="p-1 ml-1" style={{ backgroundColor:"#F6BEFF", borderRadius:"0.2rem" }}>{this.state.instaUser}</span></a></p>
+                                </div>
+                                <div className="text-center">
+                                    <button className="image-effects-final-to-submit">Done</button>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div> }
+
+
+
+                </div>
+                </div>
+                  
                 {/* <div className="container">
                         <h1 className="mb-5 mt-5 main-heading text-center">
                             It’s design<br />time !!

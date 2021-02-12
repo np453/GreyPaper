@@ -1,9 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react'
+
+import Styled from 'styled-components';
+
 import { Link } from 'react-router-dom';
 import Popover from '@material-ui/core/Popover';
 import axios from 'axios';
 import { base } from '../base';
-import Styled from 'styled-components';
+
 import Cookies from 'js-cookie';
 import {Redirect} from 'react-router-dom';
 
@@ -96,6 +99,15 @@ const Navbar = props => {
         setNavbarPopOverClass('navbar-popover-open')
         setCaretDir('rotate(180deg)')
     }
+
+    const ReadAllNotificationsLink = Styled.div`
+        color:#4A98C5;
+        font-size:12px;
+        &:hover {
+            color : #347396;
+        }
+    `
+
     document.body.style.overflow = width !== "-300px" ? "hidden" : "visible"
     return (
         <div style={{backgroundColor:props.navbarColor}} className="shadow-sm navbar__container container-fluid p-0">
@@ -139,17 +151,19 @@ const Navbar = props => {
                     <hr/>
                     <li className="sideBar-item">Recent Notifications</li>
                     <ul>
-                        {recent.slice(0, 3).reverse().map(m =>
+                        {recent.length === 0 ? <h5 className="d-flex justify-content-center align-items-center">No notifications...</h5> : recent.slice(0, 3).reverse().map(m =>
                             <li onClick={() => setOpenNotificationBox(false)} className="notification_item">{m.content}</li>
                         )}
-                        <Link onClick={() => setOpenNotificationBox(false)} style={{ fontSize: "13px" }} className="read_all_notifications_external_link" to='/notification'><li style={{ color: "#2a85ad" }}>Read all <i className="fa fa-external-link"></i></li></Link>
+                        {/* <Link onClick={() => setOpenNotificationBox(false)} style={{ fontSize: "13px" }} className="read_all_notifications_external_link" to='/notification'><li style={{ color: "#2a85ad" }}>Read all <i className="fa fa-external-link"></i></li></Link> */}
                     </ul>        
                     <hr/>
                     <Link to="/contact"><li className="sideBar-item">Get in touch</li></Link> 
                     <Link to="/"><h6 className="back_to_home_sideBar"><span>Back to Home</span></h6></Link>
                 </ul>
-                <div className={"container-fluid " + "navbar-"+props.position}>
-                <nav className={"navbar navbar-expand-lg " + "navbar-"+props.position}>
+
+                <div className={"container-fluid p-0 " + "navbar-"+props.position}>
+                
+                <nav className={"navbar border-bottom navbar-expand-lg " + "navbar-"+props.position}>
                     <div className="navbar-brand" style={{color:props.navbarBrandColor}}>
                     <img src={props.navBrandLogo} style={{ pointerEvents:"none" }} alt=""/>
                         {props.brand}
@@ -176,20 +190,35 @@ const Navbar = props => {
                             
                             {/* navbar notification icon */}
                             <div  className="d-flex justify-content-center align-items-center">
-                                <i style={{ backgroundColor:openNotificationBox ? "#EFEFEF" : null }} onClick={toggleNotificationBox} className="fa fa-inbox" aria-hidden="true" />
+                                <i style={{ backgroundColor:openNotificationBox ? "#C5ECF2" : null }} onClick={toggleNotificationBox} className="fa fa-inbox" aria-hidden="true" />
                             </div>
 
                             {/* Load notifications list */}
                             {openNotificationBox &&
                                     <div ref={ref1} className="notification_box">
                                         <div>
-                                            <h3 className="p-2 border-bottom">Notifications</h3>
+                                            <div className="row border-bottom m-0">
+                                                <div className="col-md-6">
+                                                    <h3 className="mb-0">Notifications</h3>
+                                                </div>
+                                                <div className="col-md-6 d-flex justify-content-end align-items-center ">
+                                                <Link style={{ textDecoration:"none" }} to="notifications">
+                                                    <ReadAllNotificationsLink>Read all <i className="fa fa-external-link"></i></ReadAllNotificationsLink>
+                                                </Link>
+                                                </div>
+                                            </div>
+                                            
+                                            {recent.length === 0 ? 
+                                            <h5 style={{ fontSize:"16px", color:"#c4c4c4", pointerEvents:"none" }} className="mt-5 d-flex justify-content-center align-items-center">
+                                                No notifications...
+                                            </h5> :
                                             <ul>
-                                                {recent.slice(0).reverse().map(m =>
-                                                    <Link onClick={() => setOpenNotificationBox(false)} style={{ color: "#444" }}><li className="notification_item">{m.content}</li></Link>
+                                                {recent.slice(0, 3).reverse().map(m =>
+                                                    <li onClick={() => setOpenNotificationBox(false)} className="notification_item">{m.content}</li>
                                                 )}
-                                                <Link onClick={() => setOpenNotificationBox(false)} style={{ fontSize: "13px" }} className="read_all_notifications_external_link" to='/notification'><li style={{ color: "#2a85ad" }}>Read all <i className="fa fa-external-link"></i></li></Link>
-                                            </ul>
+                                                {/* <Link onClick={() => setOpenNotificationBox(false)} style={{ fontSize: "13px" }} className="read_all_notifications_external_link" to='/notification'><li style={{ color: "#2a85ad" }}>Read all <i className="fa fa-external-link"></i></li></Link> */}
+                                            </ul> 
+                                            }
                                         </div>
                                     </div>
                                 }

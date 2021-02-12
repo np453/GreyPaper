@@ -1,8 +1,96 @@
+.s-bar-wrapper {
+    position: relative;
+    .s-bar {
+        width: 48%;
+        border: none;
+        background-color: #f9f9f9;
+        padding: 0.3rem 0.3rem 0.3rem 2.5rem;
+        outline: none;
+        background-image:url('../../assets/search-bar-icon.svg'); 
+        background-repeat: no-repeat; 
+        background-position: 10px center;
+        border-radius: 0.4rem;
+        height: 150%;
+        caret-color: rgb(117, 117, 117);
+        &::placeholder {
+            margin: 1rem;
+            padding: 0.3rem 0.3rem 0.3rem 0.5rem;
+            color: #C1C1C1;
+        }
+        
+    }
+    .all-categories-wrapper {
+        position: absolute;
+        right: 28%;
+        background-color: #f9f9f9;
+        .all-categories {
+            margin-left: 0.3rem;
+            font-weight: 600;
+            color: rgb(141, 141, 141);
+            &:hover {
+                cursor: pointer;
+            }
+        }
+        .categories-list {
+            position: absolute;
+            right: -5%;
+            margin-top: 0.4rem;
+            transition: all 0.3s;
+            z-index: 100;
+            border-radius: 0.4rem;
+            box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+            ul {
+                background-color: white;
+                margin-bottom: 0;
+                border-radius: 0.4rem;
+                padding: 0.7rem 0;
+                list-style: none;
+                li {
+                    padding: 0.2rem 1rem;
+                    &:hover {
+                        cursor: pointer;
+                        background-color: #F2F2F2;
+                    }
+                }
+            }
+        }
+    }
+    
+}
+
+.login-button {
+    h6 {
+        color: rgb(61, 61, 61);
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+.hamBurger-Open-Icon{
+    &:hover {
+        cursor: pointer;
+    }
+}
+
 .slick-prev, .slick-next {
     display: none !important;
 }
 
 .landingpage {
+
+    .sideBar {
+        background-color: #081b24;
+        list-style: none;
+        position: fixed;
+        top: 0;
+        right: 0;
+        // width: 0;
+        height: 100%;
+        z-index: 1000;
+        overflow-x: hidden;
+        transition: all 0.3s;
+    }
+
     .landingpagecontent {
         color: #4A4A4A;
         h1 {

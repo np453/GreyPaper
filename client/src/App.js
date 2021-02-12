@@ -19,6 +19,9 @@ import Otp from './components/auth/otp';
 import ResetPass from './components/auth/resetPass';
 import Payment from './components/payment';
 
+
+import AdminManagement from './API management/AdminManagement' 
+
 import Policy from './components/policy';
 
 
@@ -62,12 +65,15 @@ function App() {
           {/*HomePage route (when user is logged in) */}
           <Route path="/home" component={Homepage} />
 
+          {/* Admin Management */}
+          <Route path="/admin" component={AdminManagement} />
+
           {/*Policy*/}
           <Route path="/policy" component={Policy} />
 
         </switch>
         </ScrollToTop>
-        {/* <Footer /> */}
+        <Footer />
       </Router>
     </div>
   );

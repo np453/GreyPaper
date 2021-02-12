@@ -32,7 +32,7 @@ router.post('/', upload , async(req, res) => {
 
           var dbo = db.db("greyPaper");
 
-          var myobj = { filename:req.body.filename };
+          var myobj = { filename:req.file.filename };
 
           dbo.collection("designs").insertOne(myobj, function(err, res) {
             if (err) throw err;
