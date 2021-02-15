@@ -6,6 +6,8 @@ const User = require('../model/user');
 const refresh = require('passport-oauth2-refresh');
 const passport = require('passport');
 
+const sanitize = require('mongo-sanitize');
+
 const base = "http://localhost:6161/"
 
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
@@ -26,7 +28,7 @@ const strategy = new GoogleStrategy({
 
 async (accessToken, refreshToken, profile, done) => {
 
-const email = profile.emails[0].value;
+const email = sanitize(profile.emails[0].value);
 const userExist = await User.findOne({ email:email });
 
 if (userExist) {

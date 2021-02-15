@@ -1,0 +1,162 @@
+.dropdown {
+    font-size: 1.8rem;
+    padding-top: 0.5rem;
+    // background-color: red;
+    &:hover {
+      // .fa-caret-down {
+      //   transform: rotate(180deg);
+      //   transition: all 0.5s ease;
+      // }
+      cursor: pointer;
+      .dropdown-content {
+        // display: block;
+      }
+      
+    
+    }
+    .title {
+      color: black;
+      font-family: Open Sans;
+      font-size:1.7rem;
+      font-weight: 400;
+      padding: 0.5rem 2rem;
+      margin: 0;
+      // font-size: 2.4rem;
+      // text-decoration: none;
+      // color: $color-1;
+      opacity: 0.9;
+      // background-color: red;
+      &:hover{
+        opacity: 1;
+      }
+    }
+    ul {
+      list-style-type: none;
+    }
+  
+  }
+  
+  .dropdown-content {
+        animation-name: dropdown;
+        animation-duration: 0.5s;
+        animation-direction: alternate;
+        transition: all 0.3s ease-in-out; 
+    // border: 1px solid rgba(#000, 0.1);
+    // display: none;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    position: absolute;
+    // right: 1px;
+    // left: -1.3rem;
+    background-color: black;
+    font-weight: 500;
+    padding: 0.7rem 0 0.7rem ;
+    min-width: 17rem;
+    // animation-name: dropdownOut;
+    // animation-duration: 0.5s;
+    // animation-direction: alternate;
+    // transition: all 0.3s ease-in-out; 
+    text-align: left ;
+    z-index: 1;
+    // border: 2px solid #888;
+    border-radius: 0.4rem;
+    // animation-name: dropdown1;
+    // animation-duration: 0.5s;
+    // animation-direction: alternate; 
+    transition: all 0.3s ease-in-out;
+    &:hover {
+        cursor: pointer;
+    }
+    li {
+      font-family: $font-1;
+      padding: 0.5rem;
+      &:hover {
+        background:rgba(108, 201, 165, 0.3);
+        span {
+          color:green;
+        }
+      }
+    }
+    span {
+        color: black;
+      font-size: 1.5rem;
+      padding-left: 0.5rem;
+    }
+  
+  }
+  
+  .fa-caret-down {
+    animation-name: arrowDown;
+    animation-duration: 0.5s;
+    animation-direction: alternate;
+    transition: all 0.3s ease-in-out; 
+      
+  }
+  
+  .fa-caret-up {
+    animation-name: arrowUp;
+    animation-duration: 0.5s;
+    animation-direction: alternate;
+    transition: all 0.3s ease-in-out; 
+      
+  }
+  
+  
+  @keyframes dropdown {
+    from {
+        opacity: 0;
+        transform: translateY(-14px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+  }
+  
+  
+  
+  @keyframes arrowDown {
+    from {
+        transform: rotate(180deg);
+    }
+    to {
+        transform: rotate(0deg);
+    }
+  }
+  @keyframes arrowUp {
+    from {
+        transform: rotate(-180deg);
+    }
+    to {
+        transform: rotate(0deg);
+    }
+  }
+  // @keyframes dropdownOut {
+  //   from {
+  //       opacity: 1;
+  //       transform: translateY(0px);
+  //   }
+  //   to {
+  //       opacity: 0;
+  //       transform: translateY(-14px);
+  //   }
+  // }
+  
+  
+  .dropdown-arrow{
+    color: black;
+    font-size: 1.5rem;
+    // background-color: blue;
+    margin: 0;
+  }
+  
+  @media (min-width:121px) and (max-width:375px) {
+    .dropdown {
+      font-size: 1.1rem;
+    }
+  }
+  
+  @media (min-width:375.98px) and (max-width:550px) {
+    .dropdown {
+      font-size: 1.4rem;
+    }
+  }

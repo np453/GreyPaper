@@ -1,0 +1,30 @@
+.banner-carousel-image-wrapper {
+    background-color: rgb(27, 27, 27);
+    position: relative;
+    margin-bottom: 3rem;
+    .banner-carousel-image {
+        width: 100%;
+        object-fit: cover;
+        object-position: center;
+        opacity: 0.5;
+        height: 60vh;
+    }
+    .top-shadow {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 8vh;
+        z-index: 100;
+        background: linear-gradient(180deg, rgba(31, 31, 31, 0.4) 0%, rgba(31, 31, 31, 0) 100%);
+    }
+    .bottom-shadow {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 8vh;
+        z-index: 100;
+        background: linear-gradient(to top, rgba(31, 31, 31, 0.4) 0%, rgba(20, 20, 20, 0) 100%);
+    }
+}

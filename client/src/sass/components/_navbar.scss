@@ -218,7 +218,7 @@
     }
 }
 .notify_box {
-        
+    
     .fa-inbox {
         color: grey;
         font-size: 23px;
@@ -232,16 +232,23 @@
     .notification_box {
         animation: notifyBox 0.3s alternate;
         position: absolute;
-        right: 0%;
+        right: 1%;
         margin-top: 1rem;
         height: 23.5rem;
         width: 20rem;
         overflow: auto;
         background-color: rgba(white, 1);
-        border-radius: 0.3rem;
-        // z-index: 0;
+        border-radius: 0.15rem;
+        z-index: 1000;
         transition: all 0.3s ease;
         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+        h3 {
+            font-size: 20px;
+            font-family: $font-3;
+            color: rgb(70, 70, 70);
+            padding: 0.7rem 0;
+        }
     }
 
     //notification box animation

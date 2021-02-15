@@ -1,0 +1,118 @@
+
+*:focus {
+    outline: 0;
+    outline: none;
+}
+
+.creator-special-image {
+    width: 20rem;
+    height: 20rem;
+    object-fit: cover;
+    border-radius: 50%;
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.creator-special-container {
+    background-color: rgb(248, 248, 248);
+    padding: 1rem;
+    border-radius: 0.8rem;
+
+    //all other images that are at side
+    .slick-slide {
+        opacity: 0.5;
+        transform: scale(0.8);
+        transition: 0.3s all ease;
+    }
+
+    //image which is at center
+    .slick-current {
+        transition: 0.3s all ease;
+        transform: scale(1);
+        opacity: 1;
+        transition-delay: 0.44s;
+    }
+
+    //slick carousel arrows
+    .slick-prev:before, .slick-next:before {
+        color: rgba(rgb(66, 66, 66), 1) !important;
+        font-size: 50px !important;
+        font-family: "";
+        background-repeat: no-repeat;
+    }
+
+}
+.creator-special-heading {
+    font-family: 'Roboto';
+    padding-top:1.3rem;
+    margin: 2rem auto;
+}
+.creator-special-image-wrapper {
+    margin-bottom: 1.8rem;
+}
+
+
+
+.slick_carousel {
+    margin-bottom: 16rem;
+
+    //background-color of testimonial section
+    background-color: #F8F8F8;
+
+
+    // "Testimonial" word styling 
+    h1 {
+        font-size: 32px;
+        font-family: 'Ubuntu';
+        color: rgba(rgb(51, 51, 51), 1);
+        text-align: center;
+        padding-top: 3rem;
+    }
+
+    //line "Testimonial" word
+    hr {
+        width: 22%;
+        margin: 2rem auto;
+        background-color: rgba(white, 0.8);
+    }
+
+    //slick carousel image
+    img {
+        outline: none;
+        margin-top: 2rem;
+        border-radius: 50%;
+        transition: all 0.3s;
+        &:hover {
+            cursor: pointer;
+        //     transform: scale(1.1);
+        }
+      }
+
+    //carousel content
+    .slick_carousel_content {
+        padding-bottom: 1.5rem;
+
+        //person name
+        h4 {
+            font-size: 24px;
+            font-family: $font-1;
+        }
+
+        //person designation
+        h5 {
+            color: rgba(black, 0.6);
+            font-size: 17px;
+            margin-bottom: 2.5rem;
+        }
+
+        //person message
+        h3 {
+            max-width: 80%;
+            margin: 1.4rem auto;
+            letter-spacing: 1.2px;
+            color: rgba(rgb(36, 36, 36), 0.8);
+            font-size: 18px;
+        }
+    }
+}

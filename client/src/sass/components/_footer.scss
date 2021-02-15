@@ -1,3 +1,74 @@
 .footer {
-    background-color: #F1F1F1;
+    height: 60vh;
+    background-color: #faf9f9;
+
+    .footer-wrapper {
+        padding-top: 5rem;
+    }
+
+    .footer-links {
+        h5 {
+            color: rgb(63, 63, 63);
+            font-size: 17px;
+            font-family: 'Roboto';
+            // font-weight: 600;
+        }
+        h6 {
+            color: rgb(78, 78, 78);
+            font-size: 14px;
+            font-family: 'Roboto';
+        }
+    }
+
+    .footer-socials {
+        h5 {
+            font-family: 'Roboto';
+            color: rgb(71, 71, 71);
+        }
+        img {
+            opacity: 0.7;
+            &:hover {
+                opacity: 1;
+                cursor: pointer;
+            }
+        }
+        .footer-newsletter-section {
+            margin-top: 1.3rem;
+            h6 {
+                font-family: 'Roboto';
+            }
+            p {
+                color: #3692C6;
+                font-size: 13px;
+            }
+
+            input {
+                border: 2px solid #E4E4E4;
+                background-color: #F9F9F9;
+                color: #535353;
+                &::placeholder {
+                    padding: 0.3rem;
+                    color: #A8A8A8;
+                    font-size: 13px;
+                    font-family: 'Roboto';
+                }
+            }
+
+            button {
+                border: 2px solid #DBD9D9;
+                background-color: #ECECEC;
+                transition: all 0.3s;
+                &:hover {
+                    background-color: #dfdfdf;
+                }
+            }
+        }
+    }
+    .legal-footer-section {
+        margin-top: 7rem;
+        color: rgb(59, 59, 59);
+        h6 {
+            font-size: 13px;
+        }
+    }
 }

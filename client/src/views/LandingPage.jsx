@@ -5,12 +5,6 @@ import { base } from '../base';
 import { Link } from 'react-router-dom';
 import brandlogo from '../assets/brandlogo.svg';
 
-import landingpagewall1 from '../assets/landingpagewall1.png';
-import landingpagewall2 from '../assets/landingpagewall2.png';
-import landingpagewall3 from '../assets/landingpagewall3.png';
-import landingpagewall4 from '../assets/landingpagewall4.png';
-import landingpagewall5 from '../assets/landingpagewall5.png';
-
 import googlelogo from '../assets/googlelogo.svg';
 import fblogo from '../assets/fblogo.svg';
 
@@ -18,8 +12,21 @@ import BottomRow from '../components/bottomRow';
 
 import Slider from "react-slick";
 
+import Dropdown from '../common/Dropdown';
+
+//styled components
+import Styled from 'styled-components';
+
 //import design card
 import DesignCard from '../common/designCard';
+
+import Navbar from '../components/navbar';
+import { stat } from 'fs';
+
+import Carousel from '../Containers/Carousel';
+import CreatorSpecial from '../Containers/CreatorSpecial';
+import HighestRatings from '../Containers/HighestRatings';
+import ProductQualitySection from '../Containers/ProductQualitySection';
 class LandingPage extends Component {
 
     state = {
@@ -58,68 +65,117 @@ class LandingPage extends Component {
                 }
               ]
         },
+        hamBurgerWidth: "-300px",
+        showAllCategories : false,
+        searchQuery : ""
     }
+
     handlegooglelogin= async ()=>{
         const data = await axios.get(base + 'google/login');
         console.log(data);
 
     }
 
+    toggleHamBurger = e => {
+        this.setState({ hamBurgerWidth : "0px" })
+    }
+
+    search = ({ currentTarget : input }) => {
+        const value = input.value;
+        this.setState({ searchQuery : value });
+    }
+
+    handleClickOutside = e => {
+        if (this.ref.current && !this.ref.current.contains(e.target)) {
+            this.setState({hamBurgerWidth : "-300px"})
+        }
+    };
+
+    handleClickDropDownOutside = e => {
+        if (this.ref1.current && !this.ref1.current.contains(e.target)) {
+            this.setState({showAllCategories : false})
+        }
+    };
+
+    openCategories = () => {
+        let categoryState = this.state.showAllCategories;
+        categoryState === false ? this.setState({ showAllCategories : true }) : this.setState({ showAllCategories : false }) 
+    }
+
+    componentDidMount = async() => {
+        document.addEventListener('click', this.handleClickOutside, true);
+        document.addEventListener('click', this.handleClickDropDownOutside, true);
+    }
+    
+
+    ref = React.createRef();
+    ref1 = React.createRef();
 
     render() {
+
+        document.body.style.overflow = this.state.hamBurgerWidth !== "-300px" ? "hidden" : "visible"
+
+        const categories = 
+        <div ref={this.ref1} className="categories-list">
+            <ul>
+                <li>Food</li>
+                <li>Sports</li>
+                <li>Automotive</li>
+                <li>Motivational</li>
+                <li>Abstracts</li>
+            </ul>
+        </div>
+        console.log(this.state.searchQuery)
         return (
             <div className="container-fluid landingpage p-0">
-                <div className="row m-0 d-flex justify-content-center">
-                    <img style={{ pointerEvents:"none" }} src={brandlogo} className="brandlogo img img-fluid" alt=""/>
-                </div>
-                <div className="container landingpagecontent">
-                    <h1 className="text-center">Why design for free <span style={{ fontFamily:"Helvetica" }}>!!</span></h1>
-                    <h3 className="text-center">
-                        When you can earn<br />something out of it
-                    </h3>
-                </div>
-                <div className="container landingpagewall">
-                    <Slider  {...this.state.settings}>
-                            <div>
-                                <img className="img img-fluid" src={landingpagewall1} />     
-                            </div>
-                            <div>
-                                <img className="img img-fluid" src={landingpagewall2} />     
-                            </div>
-                            <div>
-                                <img className="img img-fluid" src={landingpagewall3} />     
-                            </div>
-                            <div>
-                                <img className="img img-fluid" src={landingpagewall4} />     
-                            </div>
-                            <div>
-                                <img className="img img-fluid" src={landingpagewall5} />     
-                            </div>
-                    </Slider>
-                    {/* <div className="landingpagecontent">
-                    <h3 className="text-center">
-                        We're building up the interface, which will be in service shortly!
-                    </h3>
-                    <h3 className="text-center mb-5">
-                        Soon, You'll be able to showcase your designs and participate in design events
-                    </h3>
-                    </div> */}
-                    <h3 className="text-center">
-                        Start uploading your designs
-                    </h3>
-                </div>
-                    <div className="login-buttons text-center">
-                        <a href={base + "google/login"}><button className="m-2"><img src={googlelogo} className="m-1 img img-fluid" alt=""/></button></a>
-                        <a href={base + "facebook/login"}><button className="m-2"><img src={fblogo} className="m-1 img img-fluid" alt=""/></button></a>
+
+            {/* Sidebar */}
+            <ul ref={this.ref} className="sideBar p-0" style={{ right:`${this.state.hamBurgerWidth}`, width: `300px`, height:"100%",  }}>
+                <h1>Sidebar</h1>
+            </ul>
+
+                <nav className="shadow-sm navbar navbar-expand-lg">
+
+                    <div className="navbar-brand">
+                        <img src={brandlogo} style={{ pointerEvents:"none" }} alt=""/>
                     </div>
 
-                    {/* <h2 className="text-center">Awesome Designs!!</h2>
-                    <div className="row designs-area m-0">
-                        <div className="col-md-3 design-card">
-                            <DesignCard image={landingpagewall1} title="Image1" by="Devang Singh" instaid="dev__ang"/>
+                    <div className="row m-0 w-100">
+                        <div className="col-md-12 s-bar-wrapper d-flex justify-content-center align-items-center">
+                            <input value={this.state.searchQuery} name="search" id="search" onChange={this.search} placeholder="Search for product name / category" className="s-bar" type="text"/>
+                            <div className="all-categories-wrapper">
+                                <span onClick={this.openCategories} className="all-categories">Category <i className="fa fa-caret-down" /></span>
+                                {this.state.showAllCategories && categories}
+                            </div>
                         </div>
-                    </div> */}
-                <BottomRow/>
+                    </div>
+                    <div className="p-2 login-button">
+                        <h6 className="mb-0">Login</h6>
+                    </div>
+                    <div onClick={this.toggleHamBurger} className="hamBurger-Open-Icon p-2">
+                        <div className="">
+                            <span class="icon-bar top-bar" style={{ height: "0.2rem" }}></span>
+                            <span class="icon-bar middle-bar" style={{ height: "0.2rem" }}></span>
+                            <span class="icon-bar bottom-bar" style={{ height: "0.2rem" }}></span>
+                        </div>
+                    </div>
+                </nav>
+
+                <Carousel />
+                <CreatorSpecial/>
+                <HighestRatings/>
+                <ProductQualitySection/>
+                {/* <div className="container landingpagewall">
+                <h3 className="text-center">
+                    Start uploading your designs
+                </h3> 
+                </div>
+                <div className="login-buttons text-center">
+                    <a href={base + "google/login"}><button className="m-2"><img src={googlelogo} className="m-1 img img-fluid" alt=""/></button></a>
+                    <a href={base + "facebook/login"}><button className="m-2"><img src={fblogo} className="m-1 img img-fluid" alt=""/></button></a>
+                </div> */}
+
+                {/* <BottomRow/> */}
             </div>
         );
     }

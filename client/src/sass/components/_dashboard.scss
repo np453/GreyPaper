@@ -5,6 +5,17 @@
         display: flex;
         flex-direction: column;
 
+        .upload-first-file {
+            label {
+                color:#347396;
+                font-size:28px;
+                &:hover {
+                    cursor: pointer;
+                    color : #1d4458;
+                }
+            }
+        }
+
         .filters-for-image-uploaded {
             display: flex;
             justify-content: center;
@@ -23,31 +34,70 @@
 
         .image-effects-final-to-submit {
             border: none;
-            background-color: transparent;
+            background-color: #434C9B;
             margin-top: 1rem;
+            width: 140px;
+            padding: 0.2rem;
             border: 3px solid #434C9B;
             border-radius: 0.2rem;
-            color: #434C9B;
+            color: #ebebeb;
             transition: all 0.3s;
             &:hover {
-                background-color: rgb(247, 247, 247);
-                box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
+                box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
             }
-            // &:focus {
-            //     box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 2px 0px, rgba(14, 30, 37, 0.32) 0px 2px 8px 0px;
-            // }
+            &:focus {
+                box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 2px 0px, rgba(14, 30, 37, 0.32) 0px 2px 8px 0px;
+            }
+        }
+
+        .design-description-section {
+            background-color: white;
+            margin-top: 2rem;
+            border-radius: 0.3rem;
+            box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
+            .insta-user-id {
+                border: 1px solid #e7e7e7;
+                // padding: 0.4rem;
+                background-color: white;
+                border-radius: 0.2rem;
+                outline: none;
+                resize: none;
+                margin-top: 1.5rem;
+                &::placeholder {
+                    color : #929292;
+                    font-family: 'Roboto';
+                }
+            }
+
+            textarea {
+                border: 1px solid #e7e7e7;
+                padding: 0.25rem;
+                border-radius: 0.2rem;
+                background-color: white;
+                outline: none;
+                resize: none;
+                margin-top: 1.5rem; 
+                color: #636363;
+                &::placeholder {
+                    color : #929292;
+                    font-family: 'Roboto';
+                }
+            }
+
         }
     }
+
 
     //image showcase section (when an image is uploaded)
     .dashboard-image-showcase-section {
         display: flex;
         justify-content: center;
+        align-items: center;
         .image-wrapper {
             
             margin-top: 2rem;
             border-radius: 1rem;
-            width: 50%;
+            width: 70%;
             box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
         }
         .dashboard-uploaded-design {
@@ -70,9 +120,9 @@
         border: none;
         position: absolute;
         z-index: 1000;
-        right: -4.8rem;
+        right: -4rem;
         transition: all 0.3s;
-        top: 0;
+        top: 0.2rem;
         &:hover {
             cursor: pointer;
         }
@@ -89,12 +139,12 @@
 
     .file-upload-button {
         border: none;
-        background: transparent;
+        background-color: #434C9B;
         margin: 0 auto;
         border: 3px solid #434C9B;
         border-radius: 0.2rem;
         width: 80%;
-        color: #434C9B;
+        color: #ebebeb;
         font-family: "Roboto";
         transition: all 0.3s;
         &:hover {
