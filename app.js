@@ -36,8 +36,9 @@ const email = require('./routes/email');
 const design = require('./routes/upload');
 const getUser = require('./routes/getUser');
 const filter = require('./routes/filter');
+const categories = require('./routes/category');
 
-const BannerCarousel = require('./routes/BannerCarousel');
+const Carousel = require('./routes/carousel');
 const creatorSpecial = require('./routes/CreatorSpecial');
 const HighestRatings = require('./routes/HighestRatings');
 
@@ -117,10 +118,10 @@ app.use('/payment', payment);
 app.use('/designupload', design);
 app.use('/get-user', getUser);
 // app.use('/upload', filter);
-app.use('/banner-carousel', BannerCarousel);
 app.use('/creator-special', creatorSpecial);
 app.use('/highest-rating', HighestRatings);
-
+app.use('/carousel', Carousel);
+app.use('/category', categories);
 
 // connect to DB
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true }, () => console.log("Database is connected!"));
@@ -156,10 +157,6 @@ app.get('/facebook/callback', passport.authenticate('facebook', {failureRedirect
   res.cookie("user",req.user._id);
   res.redirect('/home');
 });
-
-app.get('/banner-carousel/:file_name', (req,res) => {
-  res.sendFile(path.join(__dirname+"/media/BannerCarousel/"+req.params.file_name));
-})
 
 app.get('/creator-special/:file_name', (req,res) => {
   res.sendFile(path.join(__dirname+"/media/CreatorSpecial/"+req.params.file_name));

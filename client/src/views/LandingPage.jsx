@@ -118,7 +118,7 @@ class LandingPage extends Component {
         const categories = 
         <div ref={this.ref1} className="categories-list">
             <ul>
-                <li>Food</li>
+                <Link to="/collections/food"><li>Food</li></Link>
                 <li>Sports</li>
                 <li>Automotive</li>
                 <li>Motivational</li>

@@ -1,6 +1,5 @@
 const router = require('express').Router();
 const multer = require('multer')
-const Carousel = require('../model/BannerCarousel');
 
 const mongodb = require("mongodb");
 let MongoClient = mongodb.MongoClient;
@@ -8,15 +7,15 @@ let MongoClient = mongodb.MongoClient;
 let url = "mongodb://localhost:27017/greyPaper";
 
 
-const storageBannerCarousel = multer.diskStorage({
+const storageCarousel = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, 'media/BannerCarousel')
+        cb(null, 'media/carousel')
     },
     filename: function (req, file, cb) {
         cb(null, Date.now() + '-' + file.originalname)
     }
 })
-const uploadBannerCarousel = multer({ storage: storageBannerCarousel }).single('file');
+const uploadCarousel = multer({ storage: storageCarousel }).single('file');
 
 const storageCreatorSpecial = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -39,10 +38,21 @@ const storageHighestRatings = multer.diskStorage({
 const uploadHighestRatings = multer({ storage: storageHighestRatings }).single('file');
 
 
+//items storage
+const ItemStorage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'media/CreatorSpecial')
+    },
+    filename: function (req, file, cb) {
+        cb(null, Date.now() + '-' + file.originalname)
+    }
+})
+// const uploadCreatorSpecial = multer({ storage: storageCreatorSpecial }).single('file');
+
 module.exports = {
     url : url,
     ApiClient : MongoClient,
-    uploadBannerCarousel : uploadBannerCarousel,
+    uploadCarousel : uploadCarousel,
     uploadCreatorSpecial : uploadCreatorSpecial,
     uploadHighestRatings : uploadHighestRatings
 }

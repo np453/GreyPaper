@@ -23,6 +23,7 @@ import Payment from './components/payment';
 import AdminManagement from './API management/AdminManagement' 
 
 import Policy from './components/policy';
+import CategoryItem from './Containers/CategoryItem';
 
 
 
@@ -70,6 +71,9 @@ function App() {
 
           {/*Policy*/}
           <Route path="/policy" component={Policy} />
+
+          {/*Category Item*/}
+          <Route path='/collections/:collectionName' render={(props) => <CategoryItem  {...props} key={props.location.key} />} />
 
         </switch>
         </ScrollToTop>
