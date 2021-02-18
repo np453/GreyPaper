@@ -27,6 +27,7 @@
     "mongo-sanitize": "^1.1.0",
     "mongodb": "^3.3.3",
     "mongoose": "^5.11.13",
+    "mongoose-sanitize": "^1.1.0",
     "morgan": "^1.10.0",
     "multer": "^1.4.2",
     "node-instagram": "^4.3.0",

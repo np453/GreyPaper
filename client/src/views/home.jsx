@@ -9,7 +9,7 @@ import makeAnimated from 'react-select/animated';
 import axios from 'axios';
 import { base } from '../base';
 
-//import cookie
+//import cookie 
 import Cookies from 'js-cookie';
 
 //importing brandlogo
