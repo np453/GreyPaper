@@ -36,20 +36,20 @@ router.post('/' , async( req, res ) => {
 //     const findSubscribersList = async() => {
 
 //     }
-//     MongoClient.connect(url, function(err, db) {
+    // MongoClient.connect(url, function(err, db) {
 
-//         if (err) throw err;
+    //     if (err) throw err;
 
-//         var dbo = db.db("greyPaper");
+    //     var dbo = db.db("greyPaper");
 
-//         var myobj = { email:req.body.email };
+    //     var myobj = { email:req.body.email };
 
-//         dbo.collection("subscribers").insertOne(myobj, function(err, res) {
-//           if (err) throw err;
-//           db.close();
-//         });
+    //     dbo.collection("subscribers").insertOne(myobj, function(err, res) {
+    //       if (err) throw err;
+    //       db.close();
+    //     });
 
-//       });
+    //   });
 
 //       return res.status(200).send("Email registered!!")
 // })
