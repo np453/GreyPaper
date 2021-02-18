@@ -16,7 +16,9 @@ const item = new mongoose.Schema({
     designation : String,
     slug : String,
     discount : String,
-    onSale : false
+    onSale : false,
+    totalSold : String,
+    shareUrl : String
 })
 
 module.exports = mongoose.model('Items', item);

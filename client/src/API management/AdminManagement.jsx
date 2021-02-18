@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import axios, { base } from '../axios-grey';
 
+import Items from './Items';
+import Carousel from './Carousel';
+
 class AdminManagement extends Component {
 
     state = {
@@ -53,24 +56,23 @@ class AdminManagement extends Component {
     render() {
         console.log(this.state.data.file)
         return (
-            <div className="container pt-5">
-                <h5>Banner carousel</h5>
-                <form enctype="multipart/form-data">
-                    <input onChange={this.handleChange} type="file" name="file" />
-                    <button name="banner-carousel" onClick={this.handleSubmit} className="btn btn-info">Submit</button>
-                </form>
-                <hr/>
-                <h5>Creator Special</h5>
-                <form enctype="multipart/form-data">
-                    <input onChange={this.handleChange} type="file" name="CSfile" />
-                    <button name="creator-special" onClick={this.handleSubmit} className="btn btn-info">Submit</button>
-                </form>
-                <hr/>
-                <h5>Highest Ratings</h5>
-                <form enctype="multipart/form-data">
-                    <input onChange={this.handleChange} type="file" name="HRfile" />
-                    <button name="highest-rating" onClick={this.handleSubmit} className="btn btn-info">Submit</button>
-                </form>
+            <div className="container-fluid admin-page p-0">
+                <div className="container pt-5">
+                    <hr/>
+                    <h5>Creator Special</h5>
+                    <form enctype="multipart/form-data">
+                        <input onChange={this.handleChange} type="file" name="CSfile" />
+                        <button name="creator-special" onClick={this.handleSubmit} className="btn btn-info">Submit</button>
+                    </form>
+                    <hr/>
+                    <h5>Highest Ratings</h5>
+                    <form enctype="multipart/form-data">
+                        <input onChange={this.handleChange} type="file" name="HRfile" />
+                        <button name="highest-rating" onClick={this.handleSubmit} className="btn btn-info">Submit</button>
+                    </form>
+                    <Items/>
+                    <Carousel/>
+                </div>
             </div>
         );
     }
